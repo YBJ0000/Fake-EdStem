@@ -1,3 +1,7 @@
+# Changelog
+
+- 9/10: Clarify section 2.5.1 - Viewing a profile.
+
 # Assessment 3 (HTML, CSS, Vanilla JS)
 
 [Please see course website for full spec](https://cgi.cse.unsw.edu.au/~cs6080/NOW/assessments/assignments/ass3)
@@ -10,7 +14,7 @@ Please run `./util/setup.sh` in your terminal before you begin. This will set up
 
 In this assignment you are working on the frontend.
 
-Your task is to build a frontend for a UNSW rip-off version of the popular forum [EdStem](https://edstem.com/). You will of course be familiar with this application - it is the forum we use for this course!
+Your task is to build a frontend for a UNSW rip-off version of the popular forum [EdStem](https://edstem.org). You will of course be familiar with this application - it is the forum we use for this course!
 
 UNSW's rip-off of Qanda is called "Qanda". However, you don't have to build the entire application. You only have to build the frontend. The backend is already built for you as an express server built in NodeJS (see spec).
 
@@ -161,7 +165,7 @@ Milestone 5 focuses predominately on user profiles and admins manage other admin
 
 * Let a user click on a user's name from a thread or comment, and be taken to a profile screen for that user.
 * The profile screen should contain any information the backend provides for that particular user ID via (`GET /user`) (excludes the user ID).
-* The profile should also display all threads made by that person. The threads shown should show the title, content, number of likes and comments.
+* The profile should also display all threads made by that person. The threads shown should show the title, content, number of likes and number of comments.
 
 #### 2.5.2. Viewing your own profile
 * Users can view their own profile as if they would any other user's profile.
