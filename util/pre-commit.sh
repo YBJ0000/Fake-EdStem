@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Check number of lines
