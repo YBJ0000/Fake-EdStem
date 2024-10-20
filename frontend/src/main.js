@@ -41,11 +41,11 @@ if (token) {
   setLoggedIn(false)
 }
 
-const apiCall = (route, body, token) => {
+const apiCall = (route, body, method, token) => {
   return new Promise((resolve, reject) => {
     fetch(`http://localhost:5005/${route}`, {
-      method: 'POST',
-      body: JSON.stringify(body),
+      method: method,
+      body: method !== 'GET' ? JSON.stringify(body) : undefined,
       headers: {
         'Content-type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : undefined
@@ -66,7 +66,7 @@ document.getElementById('register-btn').addEventListener('click', () => {
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
 
-  apiCall('auth/register', {
+  apiCall('auth/register', 'POST', {
     email,
     password,
     name
@@ -84,7 +84,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
   const email = document.getElementById('login-email').value
   const password = document.getElementById('login-password').value
 
-  apiCall('auth/login', {
+  apiCall('auth/login', 'POST', {
     email,
     password
   }, token).then(data => {
@@ -101,11 +101,17 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
   const title = document.getElementById('new-thread-title').value
   const content = document.getElementById('new-thread-content').value
 
-  apiCall('thread', {
+  apiCall('thread', 'POST', {
     title,
     isPublic: true,
     content
   }, token).then(data => {
+    console.log(data);
+  })
+})
+
+document.getElementById('thread-load-btn').addEventListener('click', () => {
+  apiCall('threads?start=0', {}, 'GET', token).then(data => {
     console.log(data);
   })
 })
