@@ -41,7 +41,6 @@ if (token) {
   setLoggedIn(false)
 }
 
-
 const apiCall = (route, body) => {
   return new Promise((resolve, reject) => {
     fetch(`http://localhost:5005/${route}`, {
@@ -61,34 +60,21 @@ const apiCall = (route, body) => {
   })
 }
 
-
-
-
 document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
 
-  const result = fetch('http://localhost:5005/auth/register', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-      name
-    }),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
-  result.then(response => {
-    const json = response.json()
-    json.then(data => {
-      console.log(data);
-      setLoggedIn(true)
-      goToPage('dashboard')
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('userId', data.userId)
-    })
+  apiCall('auth/register', {
+    email,
+    password,
+    name
+  }).then(data => {
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('userId', data.userId)
+    setLoggedIn(true)
+    goToPage('dashboard')
+    console.log(data);
   })
 })
 
@@ -96,24 +82,14 @@ document.getElementById('login-btn').addEventListener('click', () => {
   const email = document.getElementById('login-email').value
   const password = document.getElementById('login-password').value
 
-  const result = fetch('http://localhost:5005/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
-  result.then(response => {
-    const json = response.json()
-    json.then(data => {
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('userId', data.userId)
-      setLoggedIn(true)
-      goToPage('dashboard')
-      console.log(data);
-    })
+  apiCall('auth/login', {
+    email,
+    password
+  }).then(data => {
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('userId', data.userId)
+    setLoggedIn(true)
+    goToPage('dashboard')
+    console.log(data);
   })
 })
