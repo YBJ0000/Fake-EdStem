@@ -17,10 +17,8 @@ document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
-
-  console.log(email, password, name);
-
-  console.log('A');
+  // console.log(email, password, name);
+  // console.log('A');
 
   const result = fetch('http://localhost:5005/auth/register', {
     method: 'POST',
@@ -43,6 +41,29 @@ document.getElementById('register-btn').addEventListener('click', () => {
   })
 
   // console.log(result);
+  // console.log('B');
+})
 
-  console.log('B');
+document.getElementById('login-btn').addEventListener('click', () => {
+  const email = document.getElementById('login-email').value
+  const password = document.getElementById('login-password').value
+
+  const result = fetch('http://localhost:5005/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  result.then(response => {
+    const json = response.json()
+    json.then(data => {
+      console.log(data);
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('userId', data.userId)
+    })
+  })
 })
