@@ -24,6 +24,7 @@ const setLoggedIn = (isLoggedIn => {
   } else {
     document.getElementById('logged-out-buttons').style.display = 'block'
     document.getElementById('logged-in-buttons').style.display = 'none'
+    localStorage.removeItem('token')
   }
 })
 
@@ -31,6 +32,12 @@ document.getElementById('logout').addEventListener('click', () => {
   setLoggedIn(false)
   goToPage('login')
 })
+
+const token = localStorage.getItem('token')
+if (token) {
+  setLoggedIn(true)
+  goToPage('dashboard')
+}
 
 
 document.getElementById('register-btn').addEventListener('click', () => {
