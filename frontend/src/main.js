@@ -37,6 +37,8 @@ const token = localStorage.getItem('token')
 if (token) {
   setLoggedIn(true)
   goToPage('dashboard')
+} else {
+  setLoggedIn(false)
 }
 
 
@@ -44,8 +46,6 @@ document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
-  // console.log(email, password, name);
-  // console.log('A');
 
   const result = fetch('http://localhost:5005/auth/register', {
     method: 'POST',
@@ -68,9 +68,6 @@ document.getElementById('register-btn').addEventListener('click', () => {
       localStorage.setItem('userId', data.userId)
     })
   })
-
-  // console.log(result);
-  // console.log('B');
 })
 
 document.getElementById('login-btn').addEventListener('click', () => {
