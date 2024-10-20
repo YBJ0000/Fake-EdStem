@@ -17,6 +17,21 @@ for (const name of pages) {
   })
 }
 
+const setLoggedIn = (isLoggedIn => {
+  if (isLoggedIn) {
+    document.getElementById('logged-out-buttons').style.display = 'none'
+    document.getElementById('logged-in-buttons').style.display = 'block'
+  } else {
+    document.getElementById('logged-out-buttons').style.display = 'block'
+    document.getElementById('logged-in-buttons').style.display = 'none'
+  }
+})
+
+document.getElementById('logout').addEventListener('click', () => {
+  setLoggedIn(false)
+  goToPage('login')
+})
+
 
 document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
@@ -40,6 +55,8 @@ document.getElementById('register-btn').addEventListener('click', () => {
     const json = response.json()
     json.then(data => {
       console.log(data);
+      setLoggedIn(true)
+      goToPage('dashboard')
       localStorage.setItem('token', data.token)
       localStorage.setItem('userId', data.userId)
     })
@@ -68,8 +85,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     json.then(data => {
       localStorage.setItem('token', data.token)
       localStorage.setItem('userId', data.userId)
-      document.getElementById('logged-out-buttons').style.display = 'none'
-      document.getElementById('logged-in-buttons').style.display = 'block'
+      setLoggedIn(true)
       goToPage('dashboard')
       console.log(data);
     })
