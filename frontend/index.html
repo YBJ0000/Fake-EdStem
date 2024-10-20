@@ -10,9 +10,16 @@
 </head>
 <body>
 
-  <button id="goto-page-register">Register</button>
-  <button id="goto-page-login">Login</button>
-  <button id="goto-page-dashboard">Dashboard</button>
+  <div id="logged-out-buttons">
+    <button id="goto-page-register">Register</button>
+    <button id="goto-page-login">Login</button>
+  </div>
+
+  <div id="logged-in-buttons" style="display: none;">
+    <button id="goto-page-dashboard">Dashboard</button>
+    <button id="logout">Logout</button>
+  </div>
+
 
   <hr>
 

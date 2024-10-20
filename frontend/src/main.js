@@ -2,19 +2,18 @@ import { BACKEND_PORT } from './config.js';
 // A helper you may want to use when uploading new images to the server.
 import { fileToDataUrl } from './helpers.js';
 
-const pages = ['page-register', 'page-login', 'page-dashboard']
-const buttons = {
-  'goto-page-register': 'page-register',
-  'goto-page-login': 'page-login',
-  'goto-page-dashboard': 'page-dashboard'
-}
+const pages = ['register', 'login', 'dashboard']
 
-for (const buttonId in buttons) {
-  document.getElementById(buttonId).addEventListener('click', () => {
-    pages.forEach(page => {
-      document.getElementById(page).style.display = 'none'
-    })
-    document.getElementById(buttons[buttonId]).style.display = 'block'
+const goToPage = (page => {
+  for (const oldPage of pages) {
+    document.getElementById(`page-${oldPage}`).style.display = 'none'
+  }
+  document.getElementById(`page-${page}`).style.display = 'block'
+})
+
+for (const name of pages) {
+  document.getElementById(`goto-page-${name}`).addEventListener('click', () => {
+    goToPage(name)
   })
 }
 
@@ -67,9 +66,12 @@ document.getElementById('login-btn').addEventListener('click', () => {
   result.then(response => {
     const json = response.json()
     json.then(data => {
-      console.log(data);
       localStorage.setItem('token', data.token)
       localStorage.setItem('userId', data.userId)
+      document.getElementById('logged-out-buttons').style.display = 'none'
+      document.getElementById('logged-in-buttons').style.display = 'block'
+      goToPage('dashboard')
+      console.log(data);
     })
   })
 })
