@@ -9,11 +9,28 @@
   <link rel="stylesheet" type="text/css" media="screen" href="styles/global.css" />
 </head>
 <body>
-  <h2>Register</h2>
-  Email: <input type="text" id="register-email"><br>
-  Password: <input type="text" id="register-password"><br>
-  Name: <input type="text" id="register-name"><br>
-  <button id="register-btn">Register</button>
+
+  <button id="goto-page-register">Register</button>
+  <button id="goto-page-login">Login</button>
+
+  <hr>
+
+  <div id="page-register">
+    <h2>Register</h2>
+    Email: <input type="text" id="register-email"><br>
+    Password: <input type="text" id="register-password"><br>
+    Name: <input type="text" id="register-name"><br>
+    <button id="register-btn">Register</button>
+  </div>
+
+  <div id="page-login" style="display: none;">
+    <h2>Login</h2>
+    Email: <input type="text" id="login-email"><br>
+    Password: <input type="text" id="login-password"><br>
+    <button id="login-btn">Login</button>
+  </div>
+
+
 
   <script type="module" src="src/main.js"></script>
 </body>

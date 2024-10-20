@@ -2,6 +2,17 @@ import { BACKEND_PORT } from './config.js';
 // A helper you may want to use when uploading new images to the server.
 import { fileToDataUrl } from './helpers.js';
 
+document.getElementById('goto-page-register').addEventListener('click', () => {
+  document.getElementById('page-register').style.display = 'block'
+  document.getElementById('page-login').style.display = 'none'
+})
+
+document.getElementById('goto-page-login').addEventListener('click', () => {
+  document.getElementById('page-register').style.display = 'none'
+  document.getElementById('page-login').style.display = 'block'
+})
+
+
 document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
   const password = document.getElementById('register-password').value
