@@ -66,11 +66,11 @@ document.getElementById('register-btn').addEventListener('click', () => {
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
 
-  apiCall('auth/register', 'POST', {
+  apiCall('auth/register', {
     email,
     password,
     name
-  }, token).then(data => {
+  }, 'POST', token).then(data => {
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
@@ -84,10 +84,10 @@ document.getElementById('login-btn').addEventListener('click', () => {
   const email = document.getElementById('login-email').value
   const password = document.getElementById('login-password').value
 
-  apiCall('auth/login', 'POST', {
+  apiCall('auth/login', {
     email,
     password
-  }, token).then(data => {
+  }, 'POST', token).then(data => {
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
@@ -101,17 +101,34 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
   const title = document.getElementById('new-thread-title').value
   const content = document.getElementById('new-thread-content').value
 
-  apiCall('thread', 'POST', {
+  apiCall('thread', {
     title,
     isPublic: true,
     content
-  }, token).then(data => {
+  }, 'POST', token).then(data => {
     console.log(data);
   })
 })
 
 document.getElementById('thread-load-btn').addEventListener('click', () => {
   apiCall('threads?start=0', {}, 'GET', token).then(data => {
-    console.log(data);
+
+    const threadList = document.getElementById('thread-list');
+    threadList.innerHTML = ''; 
+
+    for (const threadId of data) {
+      apiCall(`thread?id=${threadId}`, {}, 'GET', token).then(threadData => {
+        const threadItem = document.createElement('div')
+        threadItem.classList.add('thread-item')
+        threadItem.innerHTML = `
+          <p>ID: ${threadData.id}</p>
+          <p>Title: ${threadData.title}</p>
+          <p>Content: ${threadData.content}</p>
+        `
+        threadList.appendChild(threadItem)
+      })
+    }
   })
+
 })
+
