@@ -93,3 +93,16 @@ document.getElementById('login-btn').addEventListener('click', () => {
     console.log(data);
   })
 })
+
+document.getElementById('new-thread-btn').addEventListener('click', () => {
+  const title = document.getElementById('new-thread-title').value
+  const content = document.getElementById('new-thread-content').value
+
+  apiCall('thread', {
+    title,
+    isPublic: true,
+    content
+  }).then(data => {
+    console.log(data);
+  })
+})
