@@ -2,15 +2,21 @@ import { BACKEND_PORT } from './config.js';
 // A helper you may want to use when uploading new images to the server.
 import { fileToDataUrl } from './helpers.js';
 
-document.getElementById('goto-page-register').addEventListener('click', () => {
-  document.getElementById('page-register').style.display = 'block'
-  document.getElementById('page-login').style.display = 'none'
-})
+const pages = ['page-register', 'page-login', 'page-dashboard']
+const buttons = {
+  'goto-page-register': 'page-register',
+  'goto-page-login': 'page-login',
+  'goto-page-dashboard': 'page-dashboard'
+}
 
-document.getElementById('goto-page-login').addEventListener('click', () => {
-  document.getElementById('page-register').style.display = 'none'
-  document.getElementById('page-login').style.display = 'block'
-})
+for (const buttonId in buttons) {
+  document.getElementById(buttonId).addEventListener('click', () => {
+    pages.forEach(page => {
+      document.getElementById(page).style.display = 'none'
+    })
+    document.getElementById(buttons[buttonId]).style.display = 'block'
+  })
+}
 
 
 document.getElementById('register-btn').addEventListener('click', () => {
