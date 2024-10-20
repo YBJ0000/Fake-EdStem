@@ -33,7 +33,7 @@ document.getElementById('logout').addEventListener('click', () => {
   goToPage('login')
 })
 
-const token = localStorage.getItem('token')
+let token = localStorage.getItem('token')
 if (token) {
   setLoggedIn(true)
   goToPage('dashboard')
@@ -41,13 +41,14 @@ if (token) {
   setLoggedIn(false)
 }
 
-const apiCall = (route, body) => {
+const apiCall = (route, body, token) => {
   return new Promise((resolve, reject) => {
     fetch(`http://localhost:5005/${route}`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        'Authorization': token ? `Bearer ${token}` : undefined
       }
     }).then(response => {
       if (response.status !== 200) {
@@ -69,11 +70,12 @@ document.getElementById('register-btn').addEventListener('click', () => {
     email,
     password,
     name
-  }).then(data => {
+  }, token).then(data => {
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
     goToPage('dashboard')
+    token = data.token
     console.log(data);
   })
 })
@@ -85,11 +87,12 @@ document.getElementById('login-btn').addEventListener('click', () => {
   apiCall('auth/login', {
     email,
     password
-  }).then(data => {
+  }, token).then(data => {
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
     goToPage('dashboard')
+    token = data.token
     console.log(data);
   })
 })
@@ -102,7 +105,7 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     title,
     isPublic: true,
     content
-  }).then(data => {
+  }, token).then(data => {
     console.log(data);
   })
 })
