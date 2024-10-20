@@ -42,6 +42,28 @@ if (token) {
 }
 
 
+const apiCall = (route, body) => {
+  return new Promise((resolve, reject) => {
+    fetch(`http://localhost:5005/${route}`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    }).then(response => {
+      if (response.status !== 200) {
+        alert('Error registering!')
+      }
+      return response.json()
+    }).then(data => {
+      resolve(data)
+    })
+  })
+}
+
+
+
+
 document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
   const password = document.getElementById('register-password').value
