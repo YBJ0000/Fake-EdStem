@@ -2,7 +2,7 @@ import { BACKEND_PORT } from './config.js';
 // A helper you may want to use when uploading new images to the server.
 import { fileToDataUrl } from './helpers.js';
 
-const pages = ['register', 'login', 'dashboard']
+const pages = ['register', 'login', 'dashboard', 'create']
 
 const goToPage = (page => {
   for (const oldPage of pages) {

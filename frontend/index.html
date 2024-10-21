@@ -17,6 +17,7 @@
 
   <div id="logged-in-buttons" style="display: none;">
     <button id="goto-page-dashboard">Dashboard</button>
+    <button id="goto-page-create">Create</button>
     <button id="logout">Logout</button>
   </div>
 
@@ -47,19 +48,20 @@
   <div id="page-dashboard" style="display: none;">
     <h2>Dashboard</h2>
 
+    <h3>Thread List</h3>
+    <div id="thread-list"></div>
+    <button id="thread-load-btn">Load</button>
+  </div>
+
+  <div id="page-create" style="display: none;">
     <h3>New Thread</h3>
     Title: <input type="text" id="new-thread-title"><br>
     Content: <input type="text" id="new-thread-content"><br>
     Public: <input type="radio" name="thread-visibility" id="thread-public" value="true" checked>
     Private: <input type="radio" name="thread-visibility" id="thread-private" value="false"><br>
 
-    <button id="new-thread-btn">Create</button>
-
-    <h3>Thread List</h3>
-    <div id="thread-list"></div>
-    <button id="thread-load-btn">Load</button>
+    <button id="new-thread-btn">Post</button>
   </div>
-
 
 
   <script type="module" src="src/main.js"></script>
