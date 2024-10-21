@@ -147,7 +147,6 @@ const loadThreads = () => {
   apiCall(`threads?start=${start}&limit=${limit}`, {}, 'GET', token).then(data => {
 
     const threadList = document.getElementById('thread-list');
-    threadList.innerHTML = ''; 
 
     for (const threadId of data) {
       apiCall(`thread?id=${threadId}`, {}, 'GET', token).then(threadData => {
