@@ -35,3 +35,22 @@ html, body {
 .closebtn:hover {
   color: black;
 }
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.thread-list {
+  width: 30%;
+  border-right: 1px solid black;
+  padding-right: 10px;
+  overflow-y: auto;
+}
+
+.thread-content {
+  width: 65%;
+  padding-left: 20px;
+}
+

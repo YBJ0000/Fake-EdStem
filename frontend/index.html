@@ -43,15 +43,30 @@
   <div id="custom-alert" class="alert" style="display: none;">
     <span class="closebtn" id="close-alert">&times;</span>
     <p id="alert-message"></p>
-  </div>  
+  </div> 
+  
+  
 
   <div id="page-dashboard" style="display: none;">
     <h2>Dashboard</h2>
+    
+    <div class="dashboard-container">
+      <div id="thread-list" class="thread-list"></div>
   
-    <h3>Thread List</h3>
-    <div id="thread-list"></div>
+      <div id="thread-content" class="thread-content">
+        <h3 id="thread-title">Thread Title</h3>
+        <p id="thread-body">Thread Content</p>
+        <p id="thread-likes">Likes: 0</p>
+      </div>
+    </div>
+  
     <button id="thread-load-more-btn" style="display: none;">More</button>
-  </div>  
+  </div>
+  
+
+
+
+
 
   <div id="page-create" style="display: none;">
     <h3>New Thread</h3>

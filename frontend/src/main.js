@@ -155,22 +155,34 @@ const loadThreads = () => {
             const threadItem = document.createElement('div')
             threadItem.classList.add('thread-item')
             const likeCount = Object.keys(threadData.likes).length
-            const createdAt = new Date(threadData.createdAt).toLocaleString()
+            const createdAt = new Date(threadData.createdAt).toLocaleString();
+
             threadItem.innerHTML = `
-              <p>Title: ${threadData.title}</p>
-              <p>Author: ${userData.name}</p>
-              <p>Created At: ${createdAt}</p>
-              <p>Likes: ${likeCount}</p>
-              <p>Content: ${threadData.content}</p>
+              <p>${threadData.title}</p>
+              <p>${userData.name}</p>
+              <p>${createdAt}</p>
+              <p>${likeCount}</p>
             `
-            threadList.appendChild(threadItem)
+            threadItem.style.cursor = 'pointer';
+
+            // 添加边框！记得删除然后在.css里面加！！！maybe不用？？？
+            threadItem.style.border = '1px solid black'
+
+
+            threadItem.addEventListener('click', () => {
+              document.getElementById('thread-title').textContent = threadData.title;
+              document.getElementById('thread-body').textContent = threadData.content;
+              document.getElementById('thread-likes').textContent = `Likes: ${likeCount}`;
+            });
+
+            threadList.appendChild(threadItem);
           }).catch(error => {
             console.log('Failed to fetch user:', error);
-          })
+          });
         }
       }).catch(error => {
         console.log('Failed to fetch thread:', error);
-      })
+      });
     }
 
     start += limit
@@ -183,8 +195,9 @@ const loadThreads = () => {
 
   }).catch(error => {
     console.log('Failed to load threads:', error);
-  })
+  });
 }
+
 
 document.getElementById('thread-load-more-btn').addEventListener('click', () => {
   loadThreads()
