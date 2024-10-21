@@ -4,6 +4,9 @@ import { fileToDataUrl } from './helpers.js';
 
 const pages = ['register', 'login', 'dashboard', 'create']
 
+let start = 0
+const limit = 5
+
 const goToPage = (page => {
   for (const oldPage of pages) {
     document.getElementById(`page-${oldPage}`).style.display = 'none'
@@ -32,14 +35,6 @@ document.getElementById('logout').addEventListener('click', () => {
   setLoggedIn(false)
   goToPage('login')
 })
-
-let token = localStorage.getItem('token')
-if (token) {
-  setLoggedIn(true)
-  goToPage('dashboard')
-} else {
-  setLoggedIn(false)
-}
 
 const apiCall = (route, body, method, token) => {
   return new Promise((resolve, reject) => {
@@ -147,8 +142,9 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
   })
 })
 
-document.getElementById('thread-load-btn').addEventListener('click', () => {
-  apiCall('threads?start=0', {}, 'GET', token).then(data => {
+
+const loadThreads = () => {
+  apiCall(`threads?start=${start}&limit=${limit}`, {}, 'GET', token).then(data => {
 
     const threadList = document.getElementById('thread-list');
     threadList.innerHTML = ''; 
@@ -177,8 +173,29 @@ document.getElementById('thread-load-btn').addEventListener('click', () => {
         console.log('Failed to fetch thread:', error);
       })
     }
+
+    start += limit
+
+    if (data.length < limit) {
+      document.getElementById('thread-load-more-btn').style.display = 'none'
+    } else {
+      document.getElementById('thread-load-more-btn').style.display = 'block'
+    }
+
   }).catch(error => {
     console.log('Failed to load threads:', error);
   })
+}
+
+document.getElementById('thread-load-more-btn').addEventListener('click', () => {
+  loadThreads()
 })
 
+let token = localStorage.getItem('token')
+if (token) {
+  setLoggedIn(true)
+  goToPage('dashboard')
+  loadThreads()
+} else {
+  setLoggedIn(false)
+}
