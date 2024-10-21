@@ -52,7 +52,10 @@ const apiCall = (route, body, method, token) => {
       }
     }).then(response => {
       if (response.status !== 200) {
-        alert('Error registering!')
+        reject('Error occurred!')
+        alert('Error occurred!')
+        return
+        // alert('Error occurred!')
       }
       return response.json()
     }).then(data => {
@@ -71,12 +74,16 @@ document.getElementById('register-btn').addEventListener('click', () => {
     password,
     name
   }, 'POST', token).then(data => {
+    // 注册成功跳转到dashboard
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
     goToPage('dashboard')
     token = data.token
     console.log(data);
+  }).catch(error => {
+    // 注册失败显示错误信息
+    console.log('Registration failed:', error);
   })
 })
 
@@ -88,12 +95,16 @@ document.getElementById('login-btn').addEventListener('click', () => {
     email,
     password
   }, 'POST', token).then(data => {
+    // 登录成功才会跳转到dashboard
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
     goToPage('dashboard')
     token = data.token
     console.log(data);
+  }).catch(error => {
+    // 登录失败显示错误信息
+    console.log('Login failed:', error);
   })
 })
 
