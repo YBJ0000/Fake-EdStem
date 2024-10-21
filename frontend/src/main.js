@@ -52,13 +52,19 @@ const apiCall = (route, body, method, token) => {
       }
     }).then(response => {
       if (response.status !== 200) {
-        reject('Error occurred!')
-        alert('Error occurred!')
-        return
+        return response.json().then(errorData => {
+          const errorMessage = errorData.error || 'Unknown error occurred!'
+          alert(errorMessage)
+          reject(errorMessage)
+        })
       }
       return response.json()
     }).then(data => {
       resolve(data)
+    }).catch(err => {
+      const errorMessage = err.message || 'Network error or unknown error occurred!'
+      alert(errorMessage)
+      reject(errorMessage)
     })
   })
 }
@@ -68,13 +74,9 @@ document.getElementById('register-btn').addEventListener('click', () => {
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
   const confirmPassword = document.getElementById('register-confirm-password').value
-  const errorMessage = document.getElementById('error-message')
-
-  errorMessage.style.display = 'none'
 
   if (password !== confirmPassword) {
-    errorMessage.innerText = 'Passwords do not match'
-    errorMessage.style.display = 'block'
+    alert('Passwords do not match!')
     return
   }
 
