@@ -134,13 +134,16 @@ const showAlert = (message) => {
 document.getElementById('new-thread-btn').addEventListener('click', () => {
   const title = document.getElementById('new-thread-title').value
   const content = document.getElementById('new-thread-content').value
+  const isPublic = document.querySelector('input[name="thread-visibility"]:checked').value === 'true'
 
   apiCall('thread', {
     title,
-    isPublic: true,
+    isPublic,
     content
   }, 'POST', token).then(data => {
     console.log(data);
+  }).catch(error => {
+    console.log('Failed to create thread:', error);
   })
 })
 
@@ -152,6 +155,8 @@ document.getElementById('thread-load-btn').addEventListener('click', () => {
 
     for (const threadId of data) {
       apiCall(`thread?id=${threadId}`, {}, 'GET', token).then(threadData => {
+
+        if (threadData.isPublic) {
         const threadItem = document.createElement('div')
         threadItem.classList.add('thread-item')
         threadItem.innerHTML = `
@@ -160,8 +165,11 @@ document.getElementById('thread-load-btn').addEventListener('click', () => {
           <p>Content: ${threadData.content}</p>
         `
         threadList.appendChild(threadItem)
+        }
       })
     }
+  }).catch(error => {
+    console.log('Failed to load threads:', error);
   })
 })
 
