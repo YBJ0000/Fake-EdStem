@@ -55,7 +55,6 @@ const apiCall = (route, body, method, token) => {
         reject('Error occurred!')
         alert('Error occurred!')
         return
-        // alert('Error occurred!')
       }
       return response.json()
     }).then(data => {
@@ -68,6 +67,16 @@ document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
   const password = document.getElementById('register-password').value
   const name = document.getElementById('register-name').value
+  const confirmPassword = document.getElementById('register-confirm-password').value
+  const errorMessage = document.getElementById('error-message')
+
+  errorMessage.style.display = 'none'
+
+  if (password !== confirmPassword) {
+    errorMessage.innerText = 'Passwords do not match'
+    errorMessage.style.display = 'block'
+    return
+  }
 
   apiCall('auth/register', {
     email,
