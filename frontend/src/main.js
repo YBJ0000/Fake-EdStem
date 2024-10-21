@@ -155,17 +155,26 @@ document.getElementById('thread-load-btn').addEventListener('click', () => {
 
     for (const threadId of data) {
       apiCall(`thread?id=${threadId}`, {}, 'GET', token).then(threadData => {
-
         if (threadData.isPublic) {
-        const threadItem = document.createElement('div')
-        threadItem.classList.add('thread-item')
-        threadItem.innerHTML = `
-          <p>ID: ${threadData.id}</p>
-          <p>Title: ${threadData.title}</p>
-          <p>Content: ${threadData.content}</p>
-        `
-        threadList.appendChild(threadItem)
+          apiCall(`user?userId=${threadData.creatorId}`, {}, 'GET', token).then(userData => {
+            const threadItem = document.createElement('div')
+            threadItem.classList.add('thread-item')
+            const likeCount = Object.keys(threadData.likes).length
+            const createdAt = new Date(threadData.createdAt).toLocaleString()
+            threadItem.innerHTML = `
+              <p>Title: ${threadData.title}</p>
+              <p>Author: ${userData.name}</p>
+              <p>Created At: ${createdAt}</p>
+              <p>Likes: ${likeCount}</p>
+              <p>Content: ${threadData.content}</p>
+            `
+            threadList.appendChild(threadItem)
+          }).catch(error => {
+            console.log('Failed to fetch user:', error);
+          })
         }
+      }).catch(error => {
+        console.log('Failed to fetch thread:', error);
       })
     }
   }).catch(error => {
