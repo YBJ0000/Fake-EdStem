@@ -3,18 +3,14 @@ import { BACKEND_PORT } from './config.js';
 import { fileToDataUrl } from './helpers.js';
 
 import { apiCall } from './api.js';
+import { goToPage, setLoggedIn } from './ui.js';
 
-const pages = ['register', 'login', 'dashboard', 'create']
+export const pages = ['register', 'login', 'dashboard', 'create']
 
 let start = 0
 const limit = 5
 
-const goToPage = (page => {
-  for (const oldPage of pages) {
-    document.getElementById(`page-${oldPage}`).style.display = 'none'
-  }
-  document.getElementById(`page-${page}`).style.display = 'block'
-})
+
 
 for (const name of pages) {
   document.getElementById(`goto-page-${name}`).addEventListener('click', () => {
@@ -22,16 +18,7 @@ for (const name of pages) {
   })
 }
 
-const setLoggedIn = (isLoggedIn => {
-  if (isLoggedIn) {
-    document.getElementById('logged-out-buttons').style.display = 'none'
-    document.getElementById('logged-in-buttons').style.display = 'block'
-  } else {
-    document.getElementById('logged-out-buttons').style.display = 'block'
-    document.getElementById('logged-in-buttons').style.display = 'none'
-    localStorage.removeItem('token')
-  }
-})
+
 
 document.getElementById('logout').addEventListener('click', () => {
   const threadList = document.getElementById('thread-list')
