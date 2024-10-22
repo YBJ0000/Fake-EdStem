@@ -141,6 +141,11 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     content
   }, 'POST', token).then(data => {
 
+    // 重置create页面
+    document.getElementById('new-thread-title').value = '';
+    document.getElementById('new-thread-content').value = '';
+    document.getElementById('thread-public').checked = true
+
     goToPage('dashboard')
 
     const threadList = document.getElementById('thread-list')
