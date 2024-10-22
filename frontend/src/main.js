@@ -84,7 +84,11 @@ document.getElementById('register-btn').addEventListener('click', () => {
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
+
+    token = data.token
     goToPage('dashboard')
+    loadThreads()
+
     token = data.token
     console.log(data);
   }).catch(error => {
@@ -105,11 +109,13 @@ document.getElementById('login-btn').addEventListener('click', () => {
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
-    goToPage('dashboard')
+    
     token = data.token
+    goToPage('dashboard')
+    loadThreads()
+
     console.log(data);
   }).catch(error => {
-    // 登录失败显示错误信息
     console.log('Login failed:', error);
   })
 })
