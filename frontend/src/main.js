@@ -10,15 +10,11 @@ export const pages = ['register', 'login', 'dashboard', 'create']
 let start = 0
 const limit = 5
 
-
-
 for (const name of pages) {
   document.getElementById(`goto-page-${name}`).addEventListener('click', () => {
     goToPage(name)
   })
 }
-
-
 
 document.getElementById('logout').addEventListener('click', () => {
   const threadList = document.getElementById('thread-list')
@@ -28,8 +24,6 @@ document.getElementById('logout').addEventListener('click', () => {
   setLoggedIn(false)
   goToPage('login')
 })
-
-
 
 document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
@@ -95,8 +89,6 @@ document.getElementById('login-btn').addEventListener('click', () => {
   })
 })
 
-
-
 document.getElementById('new-thread-btn').addEventListener('click', () => {
   const title = document.getElementById('new-thread-title').value
   const content = document.getElementById('new-thread-content').value
@@ -128,6 +120,9 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
   })
 })
 
+document.getElementById('thread-load-more-btn').addEventListener('click', () => {
+  loadThreads()
+})
 
 const loadThreads = () => {
   apiCall(`threads?start=${start}&limit=${limit}`, {}, 'GET', token).then(data => {
@@ -194,11 +189,6 @@ const loadThreads = () => {
     console.log('Failed to load threads:', error);
   });
 }
-
-
-document.getElementById('thread-load-more-btn').addEventListener('click', () => {
-  loadThreads()
-})
 
 let token = localStorage.getItem('token')
 if (token) {
