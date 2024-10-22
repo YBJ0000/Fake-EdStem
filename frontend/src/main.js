@@ -2,6 +2,8 @@ import { BACKEND_PORT } from './config.js';
 // A helper you may want to use when uploading new images to the server.
 import { fileToDataUrl } from './helpers.js';
 
+import { apiCall } from './api.js';
+
 const pages = ['register', 'login', 'dashboard', 'create']
 
 let start = 0
@@ -32,37 +34,15 @@ const setLoggedIn = (isLoggedIn => {
 })
 
 document.getElementById('logout').addEventListener('click', () => {
+  const threadList = document.getElementById('thread-list')
+  threadList.innerHTML = ''
+  start = 0
+
   setLoggedIn(false)
   goToPage('login')
 })
 
-const apiCall = (route, body, method, token) => {
-  return new Promise((resolve, reject) => {
-    fetch(`http://localhost:${BACKEND_PORT}/${route}`, {
-      method: method,
-      body: method !== 'GET' ? JSON.stringify(body) : undefined,
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : undefined
-      }
-    }).then(response => {
-      if (response.status !== 200) {
-        return response.json().then(errorData => {
-          const errorMessage = errorData.error || 'Unknown error occurred!'
-          showAlert(errorMessage); // 使用自定义弹窗
-          reject(errorMessage)
-        })
-      }
-      return response.json()
-    }).then(data => {
-      resolve(data)
-    }).catch(err => {
-      const errorMessage = err.message || 'Network error or unknown error occurred!'
-      showAlert(errorMessage); // 使用自定义弹窗
-      reject(errorMessage)
-    })
-  })
-}
+
 
 document.getElementById('register-btn').addEventListener('click', () => {
   const email = document.getElementById('register-email').value
@@ -85,6 +65,11 @@ document.getElementById('register-btn').addEventListener('click', () => {
     setLoggedIn(true)
 
     token = data.token
+
+    const threadList = document.getElementById('thread-list')
+    threadList.innerHTML = ''
+    start = 0
+    
     goToPage('dashboard')
     loadThreads()
 
@@ -109,6 +94,11 @@ document.getElementById('login-btn').addEventListener('click', () => {
     setLoggedIn(true)
     
     token = data.token
+
+    const threadList = document.getElementById('thread-list')
+    threadList.innerHTML = ''
+    start = 0
+
     goToPage('dashboard')
     loadThreads()
 
@@ -146,12 +136,13 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     document.getElementById('new-thread-content').value = '';
     document.getElementById('thread-public').checked = true
 
-    goToPage('dashboard')
+    
 
     const threadList = document.getElementById('thread-list')
     threadList.innerHTML = ''
-
     start = 0
+
+    goToPage('dashboard')
     loadThreads()
 
     console.log(data);
