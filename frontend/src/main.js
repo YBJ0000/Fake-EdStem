@@ -80,7 +80,6 @@ document.getElementById('register-btn').addEventListener('click', () => {
     password,
     name
   }, 'POST', token).then(data => {
-    // 注册成功跳转到dashboard
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
@@ -92,7 +91,6 @@ document.getElementById('register-btn').addEventListener('click', () => {
     token = data.token
     console.log(data);
   }).catch(error => {
-    // 注册失败显示错误信息
     console.log('Registration failed:', error);
   })
 })
@@ -142,6 +140,15 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     isPublic,
     content
   }, 'POST', token).then(data => {
+
+    goToPage('dashboard')
+
+    const threadList = document.getElementById('thread-list')
+    threadList.innerHTML = ''
+
+    start = 0
+    loadThreads()
+
     console.log(data);
   }).catch(error => {
     console.log('Failed to create thread:', error);
