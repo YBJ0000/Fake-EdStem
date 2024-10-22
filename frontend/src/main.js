@@ -157,12 +157,20 @@ const loadThreads = () => {
             const likeCount = Object.keys(threadData.likes).length
             const createdAt = new Date(threadData.createdAt).toLocaleString();
 
-            threadItem.innerHTML = `
-              <p>${threadData.title}</p>
-              <p>${userData.name}</p>
-              <p>${createdAt}</p>
-              <p>${likeCount}</p>
-            `
+            const titleElement = document.createElement('p')
+            titleElement.innerText = `${threadData.title}`
+            const authorElement = document.createElement('p')
+            authorElement.innerText = `${userData.name}`
+            const dateElement = document.createElement('p')
+            dateElement.innerText = `${createdAt}`
+            const likesElement = document.createElement('p')
+            likesElement.innerText = `${likeCount}`
+
+            threadItem.appendChild(titleElement)
+            threadItem.appendChild(authorElement)
+            threadItem.appendChild(dateElement)
+            threadItem.appendChild(likesElement)
+
             threadItem.style.cursor = 'pointer';
 
             // 添加边框！记得删除然后在.css里面加！！！maybe不用？？？
