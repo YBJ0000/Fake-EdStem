@@ -198,3 +198,8 @@ if (token) {
 } else {
   setLoggedIn(false)
 }
+
+
+document.getElementById('edit-thread-btn').addEventListener('click', () => {
+  
+})
