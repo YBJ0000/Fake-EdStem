@@ -105,8 +105,6 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     document.getElementById('new-thread-content').value = '';
     document.getElementById('thread-public').checked = true
 
-    
-
     const threadList = document.getElementById('thread-list')
     threadList.innerHTML = ''
     start = 0
@@ -230,6 +228,13 @@ document.getElementById('save-thread-btn').addEventListener('click', () => {
     isPublic: isPublic,
     lock: isLocked
   }, 'PUT', token).then(data => {
+
+    // 必须清空左侧列表然后重新加载
+    const threadList = document.getElementById('thread-list')
+    threadList.innerHTML = ''
+    start = 0
+    loadThreads()
+
     document.getElementById('thread-title').textContent = newTitle
     document.getElementById('thread-body').textContent = newContent
 
