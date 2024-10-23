@@ -45,8 +45,10 @@ export const showThreadContent = (threadData) => {
   // 判断用户id和文章作者id是否一致，一致才允许修改
   if (parseInt(localStorage.userId) === currentThreadData.creatorId) {
     document.getElementById('edit-thread-btn').style.display = 'block'
+    document.getElementById('delete-thread-btn').style.display = 'block'
   } else {
     document.getElementById('edit-thread-btn').style.display = 'none'
+    document.getElementById('delete-thread-btn').style.display = 'none'
   }
 
   document.getElementById('edit-thread').style.display = 'none'
