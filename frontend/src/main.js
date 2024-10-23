@@ -165,6 +165,9 @@ const loadThreads = () => {
               document.getElementById('thread-title').textContent = threadData.title;
               document.getElementById('thread-body').textContent = threadData.content;
               document.getElementById('thread-likes').textContent = `Likes: ${likeCount}`;
+
+              // 将数据存在全局
+              window.currentThreadData = threadData
             });
 
             threadList.appendChild(threadItem);
@@ -211,4 +214,11 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('edit-thread-title').value = document.getElementById('thread-title').textContent
   document.getElementById('edit-thread-content').value = document.getElementById('thread-body').textContent
 
+  const isPublic = window.currentThreadData.isPublic
+  const isLocked = window.currentThreadData.isLocked
+
+  document.getElementById(isPublic ? 'edit-thread-public' : 'edit-thread-private').checked = true
+  document.getElementById('edit-thread-lock').checked = isLocked
+
 })
+
