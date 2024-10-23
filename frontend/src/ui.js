@@ -1,4 +1,5 @@
-import { pages } from "./main.js";
+import { pages, likeButton, updateLikeIcon } from "./main.js";
+
 
 export const goToPage = (page => {
   for (const oldPage of pages) {
@@ -52,5 +53,20 @@ export const showThreadContent = (threadData) => {
   }
 
   document.getElementById('edit-thread').style.display = 'none'
+
+
+
+  const currentUserId = localStorage.getItem('userId');
+  // 如果帖子被锁定或帖子数据不存在，隐藏点赞按钮
+  if (!currentThreadData || currentThreadData.lock) {
+    likeButton.style.display = 'none'; // 隐藏按钮
+  } else {
+    likeButton.style.display = 'inline'; // 显示按钮
+
+    // 更新图标状态：根据用户是否已经点赞设置图标
+    const isLiked = currentThreadData.likes.includes(currentUserId);
+    updateLikeIcon(isLiked);
+  }
+  
 }
 

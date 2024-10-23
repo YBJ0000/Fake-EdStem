@@ -272,7 +272,7 @@ document.getElementById('delete-thread-btn').addEventListener('click', () => {
   })
 })
 
-const likeButton = document.getElementById('like-thread-btn')
+export const likeButton = document.getElementById('like-thread-btn')
 
 likeButton.addEventListener('click', () => {
   
@@ -306,7 +306,7 @@ likeButton.addEventListener('click', () => {
 
 })
 
-const updateLikeIcon = (liked) => {
+export const updateLikeIcon = (liked) => {
   if (liked) {
     likeButton.classList.remove('bi-heart')
     likeButton.classList.add('bi-heart-fill')
