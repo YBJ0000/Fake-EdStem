@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- You can add your styles and scripts here -->
   <link rel="stylesheet" type="text/css" media="screen" href="styles/global.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
@@ -59,6 +61,9 @@
         <p id="thread-likes">Likes: 0</p>
         <button id="edit-thread-btn" style="display: none;">Edit</button>
         <button id="delete-thread-btn" style="display: none;">Delete</button>
+
+        <!-- style记得写在css里 -->
+        <i class="bi bi-heart" id="like-thread-btn" style="cursor: pointer;"></i>
 
         <div id="edit-thread" style="display: none;">
           <h3>Edit Thread</h3>
