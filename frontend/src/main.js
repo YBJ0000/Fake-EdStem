@@ -201,5 +201,14 @@ if (token) {
 
 
 document.getElementById('edit-thread-btn').addEventListener('click', () => {
-  
+  document.getElementById('thread-title').style.display = 'none'
+  document.getElementById('thread-body').style.display = 'none'
+  document.getElementById('thread-likes').style.display = 'none'
+  document.getElementById('edit-thread-btn').style.display = 'none'
+
+  document.getElementById('edit-thread').style.display = 'block'
+
+  document.getElementById('edit-thread-title').value = document.getElementById('thread-title').textContent
+  document.getElementById('edit-thread-content').value = document.getElementById('thread-body').textContent
+
 })
