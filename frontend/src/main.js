@@ -217,5 +217,31 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
 
 })
 
+document.getElementById('save-thread-btn').addEventListener('click', () => {
+  const newTitle = document.getElementById('edit-thread-title').value
+  const newContent = document.getElementById('edit-thread-content').value
+  const isPublic = document.querySelector('input[name="edit-thread-visibility"]:checked').value === 'true'
+  const isLocked = document.getElementById('edit-thread-lock').checked
 
+  apiCall('thread', {
+    id: currentThreadData.id,
+    title: newTitle,
+    content: newContent,
+    isPublic: isPublic,
+    lock: isLocked
+  }, 'PUT', token).then(data => {
+    document.getElementById('thread-title').textContent = newTitle
+    document.getElementById('thread-body').textContent = newContent
+
+    document.getElementById('edit-thread').style.display = 'none'
+
+    document.getElementById('thread-title').style.display = 'block'
+    document.getElementById('thread-body').style.display = 'block'
+    document.getElementById('thread-likes').style.display = 'block'
+    document.getElementById('edit-thread-btn').style.display = 'block'
+
+  }).catch(error => {
+    console.log('Failed to save thread:', error);
+  })
+})
 
