@@ -272,7 +272,9 @@ document.getElementById('delete-thread-btn').addEventListener('click', () => {
   })
 })
 
-document.getElementById('like-thread-btn').addEventListener('click', () => {
+const likeButton = document.getElementById('like-thread-btn')
+
+likeButton.addEventListener('click', () => {
   
   // 检查是否有帖子数据或帖子是否锁定
   if (!currentThreadData || currentThreadData.lock) {
@@ -294,10 +296,23 @@ document.getElementById('like-thread-btn').addEventListener('click', () => {
       currentThreadData.likes = currentThreadData.likes.filter(id => id !== currentUserId)
     }
 
+    // 更新图标状态
+    updateLikeIcon(!isLiked)
+
     console.log('Like status updated successfully:', data);
   }).catch(error => {
     console.log('Failed to update like status:', error);
   })
 
 })
+
+const updateLikeIcon = (liked) => {
+  if (liked) {
+    likeButton.classList.remove('bi-heart')
+    likeButton.classList.add('bi-heart-fill')
+  } else {
+    likeButton.classList.remove('bi-heart-fill')
+    likeButton.classList.add('bi-heart')
+  }
+}
 
