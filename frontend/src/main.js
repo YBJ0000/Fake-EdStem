@@ -139,6 +139,7 @@ const loadThreads = () => {
           apiCall(`user?userId=${threadData.creatorId}`, {}, 'GET', token).then(userData => {
             const threadItem = document.createElement('div')
             threadItem.classList.add('thread-item')
+
             const likeCount = Object.keys(threadData.likes).length
             const createdAt = new Date(threadData.createdAt).toLocaleString();
 
@@ -157,17 +158,11 @@ const loadThreads = () => {
             threadItem.appendChild(likesElement)
 
             threadItem.style.cursor = 'pointer';
-
             // 添加边框！记得删除然后在.css里面加！！！maybe不用？？？
             threadItem.style.border = '1px solid black'
 
             threadItem.addEventListener('click', () => {
-              document.getElementById('thread-title').textContent = threadData.title;
-              document.getElementById('thread-body').textContent = threadData.content;
-              document.getElementById('thread-likes').textContent = `Likes: ${likeCount}`;
-
-              // 将数据存在全局
-              window.currentThreadData = threadData
+              showThreadContent(threadData)
             });
 
             threadList.appendChild(threadItem);
@@ -221,4 +216,20 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('edit-thread-lock').checked = isLocked
 
 })
+
+
+const showThreadContent = (threadData) => {
+  document.getElementById('thread-title').textContent = threadData.title
+  document.getElementById('thread-body').textContent = threadData.content
+  document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(threadData.likes).length}`
+
+  window.currentThreadData = threadData
+
+  document.getElementById('thread-title').style.display = 'block'
+  document.getElementById('thread-body').style.display = 'block'
+  document.getElementById('thread-likes').style.display = 'block'
+  document.getElementById('edit-thread-btn').style.display = 'block'
+
+  document.getElementById('edit-thread').style.display = 'none'
+}
 
