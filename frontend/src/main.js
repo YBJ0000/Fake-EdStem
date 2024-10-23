@@ -272,3 +272,32 @@ document.getElementById('delete-thread-btn').addEventListener('click', () => {
   })
 })
 
+document.getElementById('like-thread-btn').addEventListener('click', () => {
+  
+  // 检查是否有帖子数据或帖子是否锁定
+  if (!currentThreadData || currentThreadData.lock) {
+    console.log('Thread is locked or data is unavailable.');
+    return;
+  }
+
+  const currentUserId = localStorage.getItem('userId');
+  // 判断用户是否已经点赞，如果是，则取消点赞，反之则点赞
+  const isLiked = currentThreadData.likes.includes(currentUserId);
+
+  apiCall('thread/like', {
+    id: currentThreadData.id,
+    turnon: !isLiked
+  }, 'PUT', token).then(data => {
+    if (!isLiked) {
+      currentThreadData.likes.push(currentUserId)
+    } else {
+      currentThreadData.likes = currentThreadData.likes.filter(id => id !== currentUserId)
+    }
+
+    console.log('Like status updated successfully:', data);
+  }).catch(error => {
+    console.log('Failed to update like status:', error);
+  })
+
+})
+
