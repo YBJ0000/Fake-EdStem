@@ -250,3 +250,25 @@ document.getElementById('save-thread-btn').addEventListener('click', () => {
   })
 })
 
+document.getElementById('delete-thread-btn').addEventListener('click', () => {
+  apiCall('thread', {
+    id: currentThreadData.id
+  }, 'DELETE', token).then(data => {
+    // 必须清空左侧列表然后重新加载
+    const threadList = document.getElementById('thread-list')
+    threadList.innerHTML = ''
+    start = 0
+    loadThreads()
+
+    // 重置右侧内容，而不是清空整个容器
+    document.getElementById('thread-title').textContent = 'Thread Title';
+    document.getElementById('thread-body').textContent = 'Thread Content';
+    document.getElementById('thread-likes').textContent = 'Likes: 0';
+
+    // 隐藏编辑和删除按钮
+    document.getElementById('edit-thread-btn').style.display = 'none'
+    document.getElementById('delete-thread-btn').style.display = 'none';
+
+  })
+})
+
