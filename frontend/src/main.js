@@ -3,7 +3,7 @@ import { BACKEND_PORT } from './config.js';
 import { fileToDataUrl } from './helpers.js';
 
 import { apiCall } from './api.js';
-import { goToPage, setLoggedIn } from './ui.js';
+import { goToPage, setLoggedIn, showThreadContent } from './ui.js';
 
 export const pages = ['register', 'login', 'dashboard', 'create']
 
@@ -218,18 +218,4 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
 })
 
 
-const showThreadContent = (threadData) => {
-  document.getElementById('thread-title').textContent = threadData.title
-  document.getElementById('thread-body').textContent = threadData.content
-  document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(threadData.likes).length}`
-
-  window.currentThreadData = threadData
-
-  document.getElementById('thread-title').style.display = 'block'
-  document.getElementById('thread-body').style.display = 'block'
-  document.getElementById('thread-likes').style.display = 'block'
-  document.getElementById('edit-thread-btn').style.display = 'block'
-
-  document.getElementById('edit-thread').style.display = 'none'
-}
 
