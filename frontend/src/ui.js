@@ -40,7 +40,14 @@ export const showThreadContent = (threadData) => {
   document.getElementById('thread-title').style.display = 'block'
   document.getElementById('thread-body').style.display = 'block'
   document.getElementById('thread-likes').style.display = 'block'
-  document.getElementById('edit-thread-btn').style.display = 'block'
+
+
+  // 判断用户id和文章作者id是否一致，一致才允许修改
+  if (parseInt(localStorage.userId) === currentThreadData.creatorId) {
+    document.getElementById('edit-thread-btn').style.display = 'block'
+  } else {
+    document.getElementById('edit-thread-btn').style.display = 'none'
+  }
 
   document.getElementById('edit-thread').style.display = 'none'
 }
