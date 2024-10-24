@@ -59,6 +59,13 @@ document.getElementById('register-btn').addEventListener('click', () => {
     password,
     name
   }, 'POST', token).then(data => {
+
+    // 清空原来内容
+    document.getElementById('register-email').value = ''
+    document.getElementById('register-password').value = ''
+    document.getElementById('register-confirm-password').value = ''
+    document.getElementById('register-name').value = ''
+
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
@@ -87,6 +94,11 @@ document.getElementById('login-btn').addEventListener('click', () => {
     email,
     password
   }, 'POST', token).then(data => {
+
+    // 清空原来内容
+    document.getElementById('login-email').value = ''
+    document.getElementById('login-password').value = ''
+
     // 登录成功才会跳转到dashboard
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)

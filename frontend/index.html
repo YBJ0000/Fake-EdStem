@@ -13,21 +13,19 @@
 <body>
 
   <nav>
-    <div id="logged-out-buttons" style="display: none;">
+    <div id="logged-out-buttons">
       <button id="goto-page-register">Register</button>
       <button id="goto-page-login">Login</button>
     </div>
   
-    <div id="logged-in-buttons" style="display: none;">
+    <div id="logged-in-buttons">
       <button id="goto-page-dashboard">Dashboard</button>
       <button id="goto-page-create">Create</button>
       <button id="logout">Logout</button>
     </div>
   </nav>
 
-
-
-  <div id="page-register">
+  <div id="page-register" style="display: none;">
     <h2>Register</h2>
     Email: <input type="text" id="register-email"><br>
     Password: <input type="password" id="register-password"><br>
@@ -36,7 +34,7 @@
     <button id="register-btn">Register</button>
   </div>
 
-  <div id="page-login" style="display: none;">
+  <div id="page-login">
     <h2>Login</h2>
     Email: <input type="text" id="login-email"><br>
     Password: <input type="text" id="login-password"><br>
