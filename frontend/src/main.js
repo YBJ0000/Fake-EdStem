@@ -346,3 +346,31 @@ export const updateLikeIcon = (liked) => {
   }
 }
 
+
+
+export const watchButton = document.getElementById('watch-thread-btn')
+
+watchButton.addEventListener('click', () => {
+  const currentUserId = parseInt(localStorage.getItem('userId'))
+  const isWatched = currentThreadData.watchees.includes(currentUserId)
+
+  apiCall('thread/watch', {
+    id: currentThreadData.id,
+    turnon: !isWatched
+  }, 'PUT', token).then(data => {
+    if (!isWatched) {
+      currentThreadData.watchees.push(currentUserId)
+    } else {
+      currentThreadData.watchees = currentThreadData.watchees.filter(id => id !== currentUserId)
+    }
+
+    // 更新图标状态
+    
+    console.log('Watch status updated successfully:',data);
+  }).catch(error => {
+    console.log('Failed to update like status:', error);
+  })
+})
+
+
+
