@@ -318,6 +318,9 @@ likeButton.addEventListener('click', () => {
     // 更新图标状态
     updateLikeIcon(!isLiked)
 
+    // 更新点赞数量
+    document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(currentThreadData.likes).length}`
+
     console.log('Like status updated successfully:', data);
   }).catch(error => {
     console.log('Failed to update like status:', error);
