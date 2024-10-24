@@ -49,15 +49,10 @@ html, body {
   padding-right: 10px;
 
   max-width: 400px;
-  /* width: 400px; */
 }
 
 .thread-item {
   max-height: 100px;
-}
-
-.title-element {
-  /* font-size: 1.2rem; */
 }
 
 .body-element {
@@ -67,6 +62,5 @@ html, body {
 
 .thread-content {
   width: 60%;
-  /* padding-left: 20px; */
 }
 
