@@ -113,3 +113,10 @@ html, body {
   }
 }
 
+nav {
+  border-bottom: 1px solid black;
+}
+
+#logged-out-buttons, #logged-in-buttons {
+  padding: 5px;
+}
