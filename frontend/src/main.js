@@ -125,27 +125,41 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     content
   }, 'POST', token).then(data => {
 
+    const newThreadId = data.id
+
+    return apiCall(`thread?id=${newThreadId}`, {}, 'GET', token)
+  }).then(threadData => {
+    window.currentThreadData = threadData
     // 重置create页面
     document.getElementById('new-thread-title').value = '';
     document.getElementById('new-thread-content').value = '';
-    document.getElementById('thread-public').checked = true
+    document.getElementById('thread-public').checked = true;
 
     // content展示新内容
-    document.getElementById('thread-title').textContent = title
-    document.getElementById('thread-body').textContent = content
-    document.getElementById('thread-likes').textContent = 'Likes: 0'
+    document.getElementById('thread-title').textContent = threadData.title;
+    document.getElementById('thread-body').textContent = threadData.content;
+    document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(threadData.likes).length}`;
 
+    document.getElementById('thread-content').style.display = 'block';
+    document.getElementById('edit-thread').style.display = 'none';
 
-    const threadList = document.getElementById('thread-list')
-    threadList.innerHTML = ''
-    start = 0
+    // 显示编辑和删除按钮
+    const editThreadButton = document.getElementById('edit-thread-btn');
+    const deleteThreadButton = document.getElementById('delete-thread-btn');
+    editThreadButton.style.display = 'block';
+    deleteThreadButton.style.display = 'block';
 
-    goToPage('dashboard')
-    loadThreads()
+    // 重新加载帖子列表
+    const threadList = document.getElementById('thread-list');
+    threadList.innerHTML = '';
+    start = 0;
 
-    console.log(data);
+    goToPage('dashboard');
+    loadThreads();
+
+    console.log(threadData);    
   }).catch(error => {
-    console.log('Failed to create thread:', error);
+    console.log('Failed to create or fetch thread:', error);
   })
 })
 
