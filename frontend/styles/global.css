@@ -76,19 +76,40 @@ html, body {
   #back-to-thread-list {
     display: none;
   }
+  .body-element {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
-@media (min-width: 401px) {
+@media (min-width: 701px) {
   .thread-list {
-    display: block !important; /* 确保列表显示 */
+    display: block !important;
   }
-
   .thread-content {
-    display: block !important; /* 确保内容显示 */
+    display: block !important;
   }
-
   #back-to-thread-list {
-    display: none !important; /* 隐藏返回按钮 */
+    display: none !important;
+  }
+  .body-element {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 700px) {
+  .body-element {
+    display: none;
+  }
+  .thread-list {
+    display: block !important;
+  }
+  .thread-content {
+    display: block !important;
+  }
+  #back-to-thread-list {
+    display: none !important;
   }
 }
 
