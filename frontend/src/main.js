@@ -20,7 +20,7 @@ document.getElementById('logout').addEventListener('click', () => {
   const threadList = document.getElementById('thread-list')
   threadList.innerHTML = ''
 
-  // 登出时重置
+  // 登出时重置content
   const threadTitle = document.getElementById('thread-title')
   const threadBody = document.getElementById('thread-body')
   const threadLikes = document.getElementById('thread-likes')
@@ -123,6 +123,12 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     document.getElementById('new-thread-title').value = '';
     document.getElementById('new-thread-content').value = '';
     document.getElementById('thread-public').checked = true
+
+    // content展示新内容
+    document.getElementById('thread-title').textContent = title
+    document.getElementById('thread-body').textContent = content
+    document.getElementById('thread-likes').textContent = 'Likes: 0'
+
 
     const threadList = document.getElementById('thread-list')
     threadList.innerHTML = ''
