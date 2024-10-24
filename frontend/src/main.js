@@ -234,6 +234,7 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('edit-thread-btn').style.display = 'none'
   document.getElementById('delete-thread-btn').style.display = 'none'
   document.getElementById('like-thread-btn').style.display = 'none'
+  document.getElementById('watch-thread-btn').style.display = 'none'
 
   document.getElementById('edit-thread').style.display = 'block'
 
