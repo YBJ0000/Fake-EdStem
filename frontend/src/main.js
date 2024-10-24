@@ -187,18 +187,29 @@ const loadThreads = () => {
             const createdAt = new Date(threadData.createdAt).toLocaleString();
 
             const titleElement = document.createElement('p')
+            titleElement.classList.add('title-element')
             titleElement.innerText = `${threadData.title}`
+
             const authorElement = document.createElement('p')
+            authorElement.classList.add('author-element')
             authorElement.innerText = `${userData.name}`
+
             const dateElement = document.createElement('p')
+            dateElement.classList.add('date-element')
             dateElement.innerText = `${createdAt}`
+
             const likesElement = document.createElement('p')
+            likesElement.classList.add('like-element')
             likesElement.innerText = `${likeCount}`
 
+            const bodyElement = document.createElement('div')
+            bodyElement.classList.add('body-element')
+            bodyElement.appendChild(authorElement)
+            bodyElement.appendChild(dateElement)
+            bodyElement.appendChild(likesElement)
+
             threadItem.appendChild(titleElement)
-            threadItem.appendChild(authorElement)
-            threadItem.appendChild(dateElement)
-            threadItem.appendChild(likesElement)
+            threadItem.appendChild(bodyElement)
 
             threadItem.style.cursor = 'pointer';
             // 添加边框！记得删除然后在.css里面加！！！maybe不用？？？

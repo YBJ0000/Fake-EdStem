@@ -4,6 +4,7 @@ html, body {
     padding: 0;
     height: 100%;
     font-family: Arial;
+    font-size: 15px;
 }
 
 .alert {
@@ -46,7 +47,23 @@ html, body {
   width: 30%;
   border-right: 1px solid black;
   padding-right: 10px;
-  overflow-y: auto;
+
+  max-width: 400px;
+  /* width: 400px; */
+}
+
+.thread-item {
+  max-height: 100px;
+  /* height: 100px; */
+}
+
+.title-element {
+  /* font-size: 1.2rem; */
+}
+
+.body-element {
+  display: flex;
+  justify-content: space-around;
 }
 
 .thread-content {
