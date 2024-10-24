@@ -27,6 +27,7 @@ document.getElementById('logout').addEventListener('click', () => {
   const editThreadButton = document.getElementById('edit-thread-btn')
   const deleteThreadButton = document.getElementById('delete-thread-btn')
   const likeButton = document.getElementById('like-thread-btn')
+  const watchButton = document.getElementById('watch-thread-btn')
   threadTitle.textContent = 'Thread Title'
   threadBody.textContent = 'Thread Content'
   threadLikes.textContent = 'Likes: 0'
@@ -36,6 +37,11 @@ document.getElementById('logout').addEventListener('click', () => {
   // 把已赞变回未赞
   if (likeButton.className === 'bi bi-heart-fill') {
     likeButton.className = 'bi bi-heart'
+  }
+
+  // 把已监视变回未监视
+  if (watchButton.className === 'bi bi-eye-fill') {
+    watchButton.className = 'bi bi-eye'
   }
 
   start = 0
@@ -365,6 +371,7 @@ watchButton.addEventListener('click', () => {
     }
 
     // 更新图标状态
+    updateWatchIcon(!isWatched)
     
     console.log('Watch status updated successfully:',data);
   }).catch(error => {
@@ -372,5 +379,13 @@ watchButton.addEventListener('click', () => {
   })
 })
 
-
+export const updateWatchIcon = (watched) => {
+  if (watched) {
+    watchButton.classList.remove('bi-eye')
+    watchButton.classList.add('bi-eye-fill')
+  } else {
+    watchButton.classList.remove('bi-eye-fill')
+    watchButton.classList.add('bi-eye')
+  }
+}
 

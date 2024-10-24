@@ -1,4 +1,4 @@
-import { pages, likeButton, updateLikeIcon } from "./main.js";
+import { pages, likeButton, updateLikeIcon, updateWatchIcon } from "./main.js";
 
 
 export const goToPage = (page => {
@@ -68,6 +68,12 @@ export const showThreadContent = (threadData) => {
 
     updateLikeIcon(isLiked);
   }
+
+  
+
+  const isWatched = currentThreadData.watchees.includes(currentUserId)
+
+  updateWatchIcon(isWatched)
   
 }
 
