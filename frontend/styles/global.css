@@ -8,6 +8,7 @@ html, body {
 }
 
 .alert {
+  display: none;
   padding: 20px;
   background-color: #f44336;
   color: white;
@@ -120,3 +121,27 @@ nav {
 #logged-out-buttons, #logged-in-buttons {
   padding: 5px;
 }
+
+.hidden-page {
+  display: none;
+}
+
+.thread-content button {
+  display: none;
+}
+
+#like-thread-btn, #watch-thread-btn {
+  display: none;
+}
+
+#edit-thread {
+  display: none;
+}
+
+/* 
+#thread-load-more-btn {
+  display: none;
+} */
+
+
+

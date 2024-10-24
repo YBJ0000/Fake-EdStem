@@ -25,7 +25,7 @@
     </div>
   </nav>
 
-  <div id="page-register" style="display: none;">
+  <div id="page-register" class="hidden-page">
     <h2>Register</h2>
     Email: <input type="text" id="register-email"><br>
     Password: <input type="password" id="register-password"><br>
@@ -41,29 +41,28 @@
     <button id="login-btn">Login</button>
   </div>
 
-  <div id="custom-alert" class="alert" style="display: none;">
+  <div id="custom-alert" class="alert">
     <span class="closebtn" id="close-alert">&times;</span>
     <p id="alert-message"></p>
   </div> 
   
-  <div id="page-dashboard" style="display: none;">
+  <div id="page-dashboard" class="hidden-page">
     <h2>Dashboard</h2>
     
     <div class="dashboard-container">
       <div id="thread-list" class="thread-list"></div>
   
       <div id="thread-content" class="thread-content">
-        <button id="back-to-thread-list" style="display: none;">Back</button>
+        <button id="back-to-thread-list">Back</button>
         <h3 id="thread-title">Select a thread</h3>
         <p id="thread-body"></p>
         <p id="thread-likes"></p>
-        <button id="edit-thread-btn" style="display: none;">Edit</button>
-        <button id="delete-thread-btn" style="display: none;">Delete</button>
-        <!-- style记得写在css里 -->
-        <i class="bi bi-heart" id="like-thread-btn" style="display: none;"></i>
-        <i class="bi bi-eye" id="watch-thread-btn" style="display: none;"></i>
+        <button id="edit-thread-btn">Edit</button>
+        <button id="delete-thread-btn">Delete</button>
+        <i class="bi bi-heart" id="like-thread-btn"></i>
+        <i class="bi bi-eye" id="watch-thread-btn"></i>
 
-        <div id="edit-thread" style="display: none;">
+        <div id="edit-thread">
           <h3>Edit Thread</h3>
           Title: <input type="text" id="edit-thread-title"><br>
           Content: <input type="text" id="edit-thread-content"><br>
@@ -76,10 +75,10 @@
       </div>
     </div>
   
-    <button id="thread-load-more-btn" style="display: none;">More</button>
+    <button id="thread-load-more-btn">More</button>
   </div>
   
-  <div id="page-create" style="display: none;">
+  <div id="page-create" class="hidden-page">
     <h3>New Thread</h3>
     Title: <input type="text" id="new-thread-title"><br>
     Content: <input type="text" id="new-thread-content"><br>
