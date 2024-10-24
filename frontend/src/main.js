@@ -26,12 +26,17 @@ document.getElementById('logout').addEventListener('click', () => {
   const threadLikes = document.getElementById('thread-likes')
   const editThreadButton = document.getElementById('edit-thread-btn')
   const deleteThreadButton = document.getElementById('delete-thread-btn')
+  const likeButton = document.getElementById('like-thread-btn')
   threadTitle.textContent = 'Thread Title'
   threadBody.textContent = 'Thread Content'
   threadLikes.textContent = 'Likes: 0'
   editThreadButton.style.display = 'none'
   deleteThreadButton.style.display = 'none'
 
+  // 把已赞变回未赞
+  if (likeButton.className === 'bi bi-heart-fill') {
+    likeButton.className = 'bi bi-heart'
+  }
 
   start = 0
 
