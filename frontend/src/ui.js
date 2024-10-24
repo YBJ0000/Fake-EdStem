@@ -56,7 +56,7 @@ export const showThreadContent = (threadData) => {
 
 
 
-  const currentUserId = localStorage.getItem('userId');
+  const currentUserId = parseInt(localStorage.getItem('userId'));
   // 如果帖子被锁定或帖子数据不存在，隐藏点赞按钮
   if (!currentThreadData || currentThreadData.lock) {
     likeButton.style.display = 'none'; // 隐藏按钮
@@ -65,6 +65,7 @@ export const showThreadContent = (threadData) => {
 
     // 更新图标状态：根据用户是否已经点赞设置图标
     const isLiked = currentThreadData.likes.includes(currentUserId);
+
     updateLikeIcon(isLiked);
   }
   

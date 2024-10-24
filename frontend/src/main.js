@@ -301,7 +301,7 @@ likeButton.addEventListener('click', () => {
     return;
   }
 
-  const currentUserId = localStorage.getItem('userId');
+  const currentUserId = parseInt(localStorage.getItem('userId'));
   // 判断用户是否已经点赞，如果是，则取消点赞，反之则点赞
   const isLiked = currentThreadData.likes.includes(currentUserId);
 
