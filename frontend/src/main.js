@@ -292,6 +292,9 @@ document.getElementById('save-thread-btn').addEventListener('click', () => {
     document.getElementById('thread-body').style.display = 'block'
     document.getElementById('thread-likes').style.display = 'block'
     document.getElementById('edit-thread-btn').style.display = 'block'
+    document.getElementById('delete-thread-btn').style.display = 'block'
+    document.getElementById('like-thread-btn').style.display = 'inline'
+    document.getElementById('watch-thread-btn').style.display = 'inline'
 
   }).catch(error => {
     console.log('Failed to save thread:', error);
