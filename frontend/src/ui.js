@@ -1,4 +1,4 @@
-import { pages, likeButton, updateLikeIcon, updateWatchIcon } from "./main.js";
+import { pages, likeButton, updateLikeIcon, updateWatchIcon, watchButton } from "./main.js";
 
 
 export const goToPage = (page => {
@@ -66,8 +66,12 @@ export const showThreadContent = (threadData) => {
   // 如果帖子被锁定或帖子数据不存在，隐藏点赞按钮
   if (!currentThreadData || currentThreadData.lock) {
     likeButton.style.display = 'none'; // 隐藏按钮
+    watchButton.style.display = 'none'
   } else {
     likeButton.style.display = 'inline'; // 显示按钮
+    likeButton.style.cursor = 'pointer'
+    watchButton.style.display = 'inline'
+    watchButton.style.cursor = 'pointer'
 
     // 更新图标状态：根据用户是否已经点赞设置图标
     const isLiked = currentThreadData.likes.includes(currentUserId);

@@ -28,21 +28,14 @@ document.getElementById('logout').addEventListener('click', () => {
   const deleteThreadButton = document.getElementById('delete-thread-btn')
   const likeButton = document.getElementById('like-thread-btn')
   const watchButton = document.getElementById('watch-thread-btn')
-  threadTitle.textContent = 'Thread Title'
-  threadBody.textContent = 'Thread Content'
-  threadLikes.textContent = 'Likes: 0'
+  threadTitle.textContent = 'Select a thread'
+  threadBody.textContent = ''
+  threadLikes.textContent = ''
   editThreadButton.style.display = 'none'
   deleteThreadButton.style.display = 'none'
+  likeButton.style.display = 'none'
+  watchButton.style.display = 'none'
 
-  // 把已赞变回未赞
-  if (likeButton.className === 'bi bi-heart-fill') {
-    likeButton.className = 'bi bi-heart'
-  }
-
-  // 把已监视变回未监视
-  if (watchButton.className === 'bi bi-eye-fill') {
-    watchButton.className = 'bi bi-eye'
-  }
 
   start = 0
 
@@ -323,13 +316,15 @@ document.getElementById('delete-thread-btn').addEventListener('click', () => {
     loadThreads()
 
     // 重置右侧内容，而不是清空整个容器
-    document.getElementById('thread-title').textContent = 'Thread Title';
-    document.getElementById('thread-body').textContent = 'Thread Content';
-    document.getElementById('thread-likes').textContent = 'Likes: 0';
+    document.getElementById('thread-title').textContent = 'Select a thread';
+    document.getElementById('thread-body').textContent = '';
+    document.getElementById('thread-likes').textContent = '';
 
     // 隐藏编辑和删除按钮
     document.getElementById('edit-thread-btn').style.display = 'none'
     document.getElementById('delete-thread-btn').style.display = 'none';
+    document.getElementById('like-thread-btn').style.display = 'none'
+    document.getElementById('watch-thread-btn').style.display = 'none'
 
   })
 })
