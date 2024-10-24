@@ -226,6 +226,8 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('thread-body').style.display = 'none'
   document.getElementById('thread-likes').style.display = 'none'
   document.getElementById('edit-thread-btn').style.display = 'none'
+  document.getElementById('delete-thread-btn').style.display = 'none'
+  document.getElementById('like-thread-btn').style.display = 'none'
 
   document.getElementById('edit-thread').style.display = 'block'
 
@@ -233,7 +235,7 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('edit-thread-content').value = document.getElementById('thread-body').textContent
 
   const isPublic = window.currentThreadData.isPublic
-  const isLocked = window.currentThreadData.isLocked
+  const isLocked = window.currentThreadData.lock
 
   document.getElementById(isPublic ? 'edit-thread-public' : 'edit-thread-private').checked = true
   document.getElementById('edit-thread-lock').checked = isLocked
