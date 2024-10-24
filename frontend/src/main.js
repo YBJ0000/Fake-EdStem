@@ -19,6 +19,20 @@ for (const name of pages) {
 document.getElementById('logout').addEventListener('click', () => {
   const threadList = document.getElementById('thread-list')
   threadList.innerHTML = ''
+
+  // 登出时重置
+  const threadTitle = document.getElementById('thread-title')
+  const threadBody = document.getElementById('thread-body')
+  const threadLikes = document.getElementById('thread-likes')
+  const editThreadButton = document.getElementById('edit-thread-btn')
+  const deleteThreadButton = document.getElementById('delete-thread-btn')
+  threadTitle.textContent = 'Thread Title'
+  threadBody.textContent = 'Thread Content'
+  threadLikes.textContent = 'Likes: 0'
+  editThreadButton.style.display = 'none'
+  deleteThreadButton.style.display = 'none'
+
+
   start = 0
 
   setLoggedIn(false)
