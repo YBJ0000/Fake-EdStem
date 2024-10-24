@@ -38,6 +38,12 @@ export const showThreadContent = (threadData) => {
 
   window.currentThreadData = threadData
 
+  if (window.innerWidth <= 400) {
+    document.querySelector('.thread-list').style.display = 'none';
+    document.querySelector('.thread-content').style.display = 'block';
+    document.getElementById('back-to-thread-list').style.display = 'block';
+  }
+
   document.getElementById('thread-title').style.display = 'block'
   document.getElementById('thread-body').style.display = 'block'
   document.getElementById('thread-likes').style.display = 'block'

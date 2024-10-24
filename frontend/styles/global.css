@@ -64,3 +64,31 @@ html, body {
   width: 60%;
 }
 
+@media (max-width: 400px) {
+  .thread-list {
+    width: 100%;
+    display: block;
+  }
+  .thread-content {
+    width: 100%;
+    display: none;
+  }
+  #back-to-thread-list {
+    display: none;
+  }
+}
+
+@media (min-width: 401px) {
+  .thread-list {
+    display: block !important; /* 确保列表显示 */
+  }
+
+  .thread-content {
+    display: block !important; /* 确保内容显示 */
+  }
+
+  #back-to-thread-list {
+    display: none !important; /* 隐藏返回按钮 */
+  }
+}
+

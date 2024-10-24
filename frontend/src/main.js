@@ -418,3 +418,11 @@ export const updateWatchIcon = (watched) => {
   }
 }
 
+// 返回按钮的点击事件
+document.getElementById('back-to-thread-list').addEventListener('click', () => {
+  document.querySelector('.thread-list').style.display = 'block'; // 显示帖子列表
+  document.querySelector('.thread-content').style.display = 'none'; // 隐藏帖子内容
+  document.getElementById('back-to-thread-list').style.display = 'none'; // 隐藏返回按钮
+});
+
+
