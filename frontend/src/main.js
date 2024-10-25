@@ -382,13 +382,13 @@ export const updateLikeIcon = (liked) => {
   if (liked) {
     likeButton.classList.remove('bi-heart')
     likeButton.classList.add('bi-heart-fill')
+    likeButton.style.color = 'red'
   } else {
     likeButton.classList.remove('bi-heart-fill')
     likeButton.classList.add('bi-heart')
+    likeButton.style.color = 'black'
   }
 }
-
-
 
 export const watchButton = document.getElementById('watch-thread-btn')
 
