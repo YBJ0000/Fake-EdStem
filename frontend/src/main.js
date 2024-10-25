@@ -7,7 +7,6 @@ import { goToPage, setLoggedIn } from './ui.js';
 import { loadThreads } from './loadThreads.js';
 
 export const pages = ['register', 'login', 'dashboard', 'create']
-
 export let start = 0
 export const limit = 5
 
@@ -190,8 +189,6 @@ document.getElementById('thread-load-more-btn').addEventListener('click', () => 
   loadThreads()
 })
 
-
-
 export let token = localStorage.getItem('token')
 if (token) {
   setLoggedIn(true)
@@ -200,7 +197,6 @@ if (token) {
 } else {
   setLoggedIn(false)
 }
-
 
 document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('thread-title').style.display = 'none'
