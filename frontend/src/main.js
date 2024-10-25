@@ -422,3 +422,81 @@ const formatTimeAgo = (date) => {
 };
 
 
+
+const submitComment = () => {
+  const content = document.getElementById('new-comment-content').value;
+  
+  if (currentThreadData.lock) {
+    console.log('Thread is locked, cannot comment.');
+    return;
+  }
+  if (!content.trim()) {
+    alert('Comment cannot be empty!');
+    return;
+  }
+
+  apiCall('comment', {
+    content,
+    threadId: currentThreadData.id,
+    parentCommentId: null
+  }, 'POST', token).then(data => {
+    console.log('Comment posted successfully:', data);
+    // 清空输入框并刷新评论区
+    document.getElementById('new-comment-content').value = '';
+    showComments(currentThreadData.id);
+  }).catch(error => {
+    console.log('Failed to post comment:', error);
+  });
+}
+
+document.getElementById('submit-comment-btn').addEventListener('click', submitComment);
+
+const submitReply = () => {
+  const content = document.getElementById('reply-comment-content').value;
+  const parentCommentId = document.getElementById('reply-modal').getAttribute('data-parent-comment-id');
+  
+  if (currentThreadData.lock) {
+    console.log('Thread is locked, cannot reply.');
+    return;
+  }
+
+  if (!content.trim()) {
+    alert('Reply cannot be empty!');
+    return;
+  }
+
+  apiCall('comment', {
+    content,
+    threadId: currentThreadData.id,
+    parentCommentId: parseInt(parentCommentId)
+  }, 'POST', token).then(data => {
+    console.log('Reply posted successfully:', data);
+
+    // 清空回复框，关闭模态框，并刷新评论区
+    document.getElementById('reply-comment-content').value = '';
+    closeReplyModal();
+    showComments(currentThreadData.id);
+  }).catch(error => {
+    console.log('Failed to post reply:', error);
+  });
+}
+
+document.getElementById('submit-reply-btn').addEventListener('click', submitReply);
+
+// 关闭回复模态框
+const closeReplyModal = () => {
+  const modal = document.getElementById('reply-modal');
+  modal.style.display = 'none';
+  document.getElementById('reply-comment-content').value = '';
+}
+
+// 监听关闭模态框按钮
+document.getElementById('close-reply-modal').addEventListener('click', closeReplyModal);
+
+export const checkLockedThread = () => {
+  if (currentThreadData.lock) {
+    document.getElementById('comment-section').style.display = 'none';
+  } else {
+    document.getElementById('comment-section').style.display = 'block';
+  }
+}
