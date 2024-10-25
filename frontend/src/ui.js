@@ -42,11 +42,14 @@ export const showThreadContent = (threadData) => {
 
   window.currentThreadData = threadData
 
-    // 调用 ShowComments 来显示评论
-    showComments(threadData.id);
+  // 调用 ShowComments 来显示评论
+  showComments(threadData.id);
 
-    checkLockedThread();
+  checkLockedThread();
 
+  document.getElementById('comment-list').style.display = 'block'
+  document.getElementById('comment-section').style.display = 'block'
+  document.getElementById('reply-modal').style.display = 'block'
 
   if (window.innerWidth <= 400) {
     document.querySelector('.thread-list').style.display = 'none';

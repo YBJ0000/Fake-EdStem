@@ -43,6 +43,12 @@ document.getElementById('logout').addEventListener('click', () => {
   const editThreadPage = document.getElementById('edit-thread')
   editThreadPage.style.display = 'none'
 
+  const commentList = document.getElementById('comment-list')
+  const commentSection = document.getElementById('comment-section')
+  const replyModal = document.getElementById('reply-modal')
+  commentList.style.display = 'none'
+  commentSection.style.display = 'none'
+  replyModal.style.display = 'none'
 
   start = 0
 
@@ -212,6 +218,13 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('edit-thread-title').value = document.getElementById('thread-title').textContent
   document.getElementById('edit-thread-content').value = document.getElementById('thread-body').textContent
 
+  const commentList = document.getElementById('comment-list')
+  const commentSection = document.getElementById('comment-section')
+  const replyModal = document.getElementById('reply-modal')
+  commentList.style.display = 'none'
+  commentSection.style.display = 'none'
+  replyModal.style.display = 'none'
+
   const isPublic = window.currentThreadData.isPublic
   const isLocked = window.currentThreadData.lock
 
@@ -273,6 +286,10 @@ document.getElementById('delete-thread-btn').addEventListener('click', () => {
     document.getElementById('delete-thread-btn').style.display = 'none';
     document.getElementById('like-thread-btn').style.display = 'none'
     document.getElementById('watch-thread-btn').style.display = 'none'
+
+    document.getElementById('comment-list').style.display = 'none'
+    document.getElementById('comment-section').style.display = 'none'
+    document.getElementById('reply-modal').style.display = 'none'
 
   })
 })
@@ -362,7 +379,6 @@ export const showComments = (threadId) => {
   });
 };
 
-// 创建评论的 DOM 元素
 const createCommentElement = (comment) => {
   const commentElement = document.createElement('div');
   commentElement.classList.add('comment');
@@ -397,7 +413,6 @@ const createCommentElement = (comment) => {
   return commentElement;
 };
 
-// 格式化时间，转换成“xx时间前”
 const formatTimeAgo = (date) => {
   const now = new Date();
   const diffInSeconds = Math.floor((now - date) / 1000);
@@ -420,8 +435,6 @@ const formatTimeAgo = (date) => {
   if (diffInWeeks === 1) return '1 week ago';
   return `${diffInWeeks} weeks ago`;
 };
-
-
 
 const submitComment = () => {
   const content = document.getElementById('new-comment-content').value;
@@ -483,14 +496,12 @@ const submitReply = () => {
 
 document.getElementById('submit-reply-btn').addEventListener('click', submitReply);
 
-// 关闭回复模态框
 const closeReplyModal = () => {
   const modal = document.getElementById('reply-modal');
   modal.style.display = 'none';
   document.getElementById('reply-comment-content').value = '';
 }
 
-// 监听关闭模态框按钮
 document.getElementById('close-reply-modal').addEventListener('click', closeReplyModal);
 
 export const checkLockedThread = () => {

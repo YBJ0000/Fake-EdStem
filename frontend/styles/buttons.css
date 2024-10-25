@@ -17,3 +17,7 @@
 .thread-content > button {
   display: none;
 }
+
+#comment-section, #reply-modal {
+  display: none;
+}
