@@ -343,7 +343,7 @@ document.getElementById('back-to-thread-list').addEventListener('click', () => {
 });
 
 
-export const ShowComments = (threadId) => {
+export const showComments = (threadId) => {
   apiCall(`comments?threadId=${threadId}`, {}, 'GET', token).then(comments => {
     const commentList = document.getElementById('comment-list');
     commentList.innerHTML = ''; // 清空之前的评论
