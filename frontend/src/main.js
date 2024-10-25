@@ -5,6 +5,7 @@ import { fileToDataUrl } from './helpers.js';
 import { apiCall } from './api.js';
 import { goToPage, setLoggedIn } from './ui.js';
 import { loadThreads } from './loadThreads.js';
+import { updateLikeIcon, updateWatchIcon } from './updateIcon.js';
 
 export const pages = ['register', 'login', 'dashboard', 'create']
 export let start = 0
@@ -309,17 +310,6 @@ likeButton.addEventListener('click', () => {
 
 })
 
-export const updateLikeIcon = (liked) => {
-  if (liked) {
-    likeButton.classList.remove('bi-heart')
-    likeButton.classList.add('bi-heart-fill')
-    likeButton.style.color = 'red'
-  } else {
-    likeButton.classList.remove('bi-heart-fill')
-    likeButton.classList.add('bi-heart')
-    likeButton.style.color = 'black'
-  }
-}
 
 export const watchButton = document.getElementById('watch-thread-btn')
 
@@ -345,15 +335,6 @@ watchButton.addEventListener('click', () => {
   })
 })
 
-export const updateWatchIcon = (watched) => {
-  if (watched) {
-    watchButton.classList.remove('bi-eye')
-    watchButton.classList.add('bi-eye-fill')
-  } else {
-    watchButton.classList.remove('bi-eye-fill')
-    watchButton.classList.add('bi-eye')
-  }
-}
 
 document.getElementById('back-to-thread-list').addEventListener('click', () => {
   document.querySelector('.thread-list').style.display = 'block';

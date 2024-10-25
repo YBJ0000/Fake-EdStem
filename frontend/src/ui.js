@@ -1,4 +1,5 @@
-import { pages, likeButton, updateLikeIcon, updateWatchIcon, watchButton } from "./main.js";
+import { pages, likeButton, watchButton } from "./main.js";
+import { updateLikeIcon, updateWatchIcon } from "./updateIcon.js";
 
 
 export const goToPage = (page => {
