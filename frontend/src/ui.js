@@ -48,9 +48,11 @@ export const showThreadContent = (threadData) => {
   document.getElementById('thread-body').style.display = 'block'
   document.getElementById('thread-likes').style.display = 'block'
 
+  const currentUserId = parseInt(localStorage.getItem('userId'));
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   // 判断用户id和文章作者id是否一致，一致才允许修改
-  if (parseInt(localStorage.userId) === currentThreadData.creatorId) {
+  if (currentUserId === currentThreadData.creatorId || isAdmin) {
     document.getElementById('edit-thread-btn').style.display = 'block'
     document.getElementById('delete-thread-btn').style.display = 'block'
   } else {
@@ -60,9 +62,7 @@ export const showThreadContent = (threadData) => {
 
   document.getElementById('edit-thread').style.display = 'none'
 
-
-
-  const currentUserId = parseInt(localStorage.getItem('userId'));
+  
   // 如果帖子被锁定或帖子数据不存在，隐藏点赞按钮
   if (!currentThreadData || currentThreadData.lock) {
     likeButton.style.display = 'none'; // 隐藏按钮

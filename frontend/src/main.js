@@ -114,7 +114,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     // 获取当前用户信息
     const userId = localStorage.getItem('userId')
     apiCall(`user?userId=${userId}`, {}, 'GET', token).then(userData => {
-      console.log('Is Admin:', userData.admin);
+      localStorage.setItem('isAdmin', userData.admin)
     }).catch(error => {
       console.log('Failed to fetch user data:', error);
     })
