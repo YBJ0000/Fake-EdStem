@@ -401,13 +401,24 @@ const createCommentElement = (comment) => {
 const formatTimeAgo = (date) => {
   const now = new Date();
   const diffInSeconds = Math.floor((now - date) / 1000);
+
   if (diffInSeconds < 60) return 'Just now';
+
   const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) return `${diffInMinutes} minute(s) ago`;
+  if (diffInMinutes === 1) return '1 minute ago';
+  if (diffInMinutes < 60) return `${diffInMinutes} minutes ago`;
+
   const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) return `${diffInHours} hour(s) ago`;
+  if (diffInHours === 1) return '1 hour ago';
+  if (diffInHours < 24) return `${diffInHours} hours ago`;
+
   const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays < 7) return `${diffInDays} day(s) ago`;
+  if (diffInDays === 1) return '1 day ago';
+  if (diffInDays < 7) return `${diffInDays} days ago`;
+
   const diffInWeeks = Math.floor(diffInDays / 7);
-  return `${diffInWeeks} week(s) ago`;
+  if (diffInWeeks === 1) return '1 week ago';
+  return `${diffInWeeks} weeks ago`;
 };
+
+
