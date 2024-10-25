@@ -343,3 +343,71 @@ document.getElementById('back-to-thread-list').addEventListener('click', () => {
 });
 
 
+export const ShowComments = (threadId) => {
+  apiCall(`comments?threadId=${threadId}`, {}, 'GET', token).then(comments => {
+    const commentList = document.getElementById('comment-list');
+    commentList.innerHTML = ''; // 清空之前的评论
+
+    // 按时间倒序排列评论
+    comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    // 遍历所有评论并渲染
+    comments.forEach(comment => {
+      const commentElement = createCommentElement(comment);
+      commentList.appendChild(commentElement);
+    });
+
+  }).catch(error => {
+    console.log('Failed to load comments:', error);
+  });
+};
+
+// 创建评论的 DOM 元素
+const createCommentElement = (comment) => {
+  const commentElement = document.createElement('div');
+  commentElement.classList.add('comment');
+
+  // 生成头像、文本、时间和点赞数
+  const commentText = document.createElement('p');
+  commentText.textContent = comment.content;
+
+  const timeAgo = document.createElement('span');
+  timeAgo.textContent = formatTimeAgo(new Date(comment.createdAt));
+
+  const likeCount = document.createElement('span');
+  likeCount.textContent = `Likes: ${comment.likes.length}`;
+
+  // 组装评论元素
+  commentElement.appendChild(commentText);
+  commentElement.appendChild(timeAgo);
+  commentElement.appendChild(likeCount);
+
+  // 如果有父评论，则递归生成子评论并缩进
+  if (comment.replies && comment.replies.length > 0) {
+    const repliesContainer = document.createElement('div');
+    repliesContainer.classList.add('replies');
+    comment.replies.forEach(reply => {
+      const replyElement = createCommentElement(reply);
+      replyElement.style.marginLeft = '20px';  // 缩进
+      repliesContainer.appendChild(replyElement);
+    });
+    commentElement.appendChild(repliesContainer);
+  }
+
+  return commentElement;
+};
+
+// 格式化时间，转换成“xx时间前”
+const formatTimeAgo = (date) => {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - date) / 1000);
+  if (diffInSeconds < 60) return 'Just now';
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) return `${diffInMinutes} minute(s) ago`;
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) return `${diffInHours} hour(s) ago`;
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays < 7) return `${diffInDays} day(s) ago`;
+  const diffInWeeks = Math.floor(diffInDays / 7);
+  return `${diffInWeeks} week(s) ago`;
+};
