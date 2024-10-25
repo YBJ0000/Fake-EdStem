@@ -41,6 +41,9 @@ document.getElementById('logout').addEventListener('click', () => {
   likeButton.style.display = 'none'
   watchButton.style.display = 'none'
 
+  const editThreadPage = document.getElementById('edit-thread')
+  editThreadPage.style.display = 'none'
+
 
   start = 0
 
@@ -70,6 +73,11 @@ document.getElementById('register-btn').addEventListener('click', () => {
     document.getElementById('register-password').value = ''
     document.getElementById('register-confirm-password').value = ''
     document.getElementById('register-name').value = ''
+
+    const threadContent = document.getElementById('thread-content')
+    threadContent.style.display = 'block'
+    const threadTitle = document.getElementById('thread-title')
+    threadTitle.style.display = 'block'
 
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
@@ -103,6 +111,11 @@ document.getElementById('login-btn').addEventListener('click', () => {
     // 清空原来内容
     document.getElementById('login-email').value = ''
     document.getElementById('login-password').value = ''
+
+    const threadContent = document.getElementById('thread-content')
+    threadContent.style.display = 'block'
+    const threadTitle = document.getElementById('thread-title')
+    threadTitle.style.display = 'block'
 
     // 登录成功才会跳转到dashboard
     localStorage.setItem('token', data.token)
