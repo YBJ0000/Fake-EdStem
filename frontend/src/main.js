@@ -111,6 +111,14 @@ document.getElementById('login-btn').addEventListener('click', () => {
     
     token = data.token
 
+    // 获取当前用户信息
+    const userId = localStorage.getItem('userId')
+    apiCall(`user?userId=${userId}`, {}, 'GET', token).then(userData => {
+      console.log('Is Admin:', userData.admin);
+    }).catch(error => {
+      console.log('Failed to fetch user data:', error);
+    })
+
     const threadList = document.getElementById('thread-list')
     threadList.innerHTML = ''
     start = 0
