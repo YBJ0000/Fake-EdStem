@@ -7,64 +7,6 @@ html, body {
     font-size: 15px;
 }
 
-.alert {
-  display: none;
-  padding: 20px;
-  background-color: #f44336;
-  color: white;
-  margin-bottom: 15px;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  border-radius: 5px;
-  min-width: 300px;
-  text-align: center;
-}
-
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
-}
-
-.dashboard-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.thread-list {
-  width: 30%;
-  border-right: 1px solid black;
-  padding-right: 10px;
-
-  max-width: 400px;
-}
-
-.thread-item {
-  max-height: 100px;
-}
-
-.body-element {
-  display: flex;
-  justify-content: space-around;
-}
-
-.thread-content {
-  width: 60%;
-}
-
 @media (max-width: 400px) {
   .thread-list {
     width: 100%;
@@ -118,30 +60,9 @@ nav {
   border-bottom: 1px solid black;
 }
 
-#logged-out-buttons, #logged-in-buttons {
-  padding: 5px;
-}
-
 .hidden-page {
   display: none;
 }
-
-.thread-content button {
-  display: none;
-}
-
-#like-thread-btn, #watch-thread-btn {
-  display: none;
-}
-
-#edit-thread {
-  display: none;
-}
-
-/* 
-#thread-load-more-btn {
-  display: none;
-} */
 
 
 

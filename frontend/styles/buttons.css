@@ -1,0 +1,19 @@
+#like-thread-btn, #watch-thread-btn {
+  display: none;
+}
+
+#edit-thread {
+  display: none;
+}
+
+#logged-out-buttons, #logged-in-buttons {
+  padding: 5px;
+}
+
+#thread-load-more-btn {
+  display: none;
+}
+
+.thread-content button {
+  display: none;
+}
