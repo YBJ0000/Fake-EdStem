@@ -2,6 +2,7 @@ import { pages, likeButton, watchButton } from "./main.js";
 import { updateLikeIcon, updateWatchIcon } from "./updateIcon.js";
 
 import { showComments } from "./main.js";
+import { checkLockedThread } from "./main.js";
 
 
 export const goToPage = (page => {
@@ -43,6 +44,9 @@ export const showThreadContent = (threadData) => {
 
     // 调用 ShowComments 来显示评论
     showComments(threadData.id);
+
+    checkLockedThread();
+
 
   if (window.innerWidth <= 400) {
     document.querySelector('.thread-list').style.display = 'none';
