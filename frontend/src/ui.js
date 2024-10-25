@@ -1,6 +1,8 @@
 import { pages, likeButton, watchButton } from "./main.js";
 import { updateLikeIcon, updateWatchIcon } from "./updateIcon.js";
 
+import { ShowComments } from "./main.js";
+
 
 export const goToPage = (page => {
   for (const oldPage of pages) {
@@ -38,6 +40,9 @@ export const showThreadContent = (threadData) => {
   document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(threadData.likes).length}`
 
   window.currentThreadData = threadData
+
+    // 调用 ShowComments 来显示评论
+    ShowComments(threadData.id);
 
   if (window.innerWidth <= 400) {
     document.querySelector('.thread-list').style.display = 'none';
