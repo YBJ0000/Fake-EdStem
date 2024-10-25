@@ -167,6 +167,10 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     document.getElementById('new-thread-content').value = '';
     document.getElementById('thread-public').checked = true;
 
+    document.getElementById('comment-list').style.display = 'none'
+    document.getElementById('comment-section').style.display = 'none'
+    document.getElementById('reply-modal').style.display = 'none'
+
     document.getElementById('thread-title').textContent = threadData.title;
     document.getElementById('thread-body').textContent = threadData.content;
     document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(threadData.likes).length}`;

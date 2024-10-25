@@ -18,6 +18,10 @@
   display: none;
 }
 
-#comment-section, #reply-modal {
+#comment-section {
+  display: none;
+}
+
+#reply-modal {
   display: none;
 }
