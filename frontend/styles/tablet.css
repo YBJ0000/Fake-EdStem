@@ -1,0 +1,14 @@
+@media (min-width: 401px) and (max-width: 700px) {
+  .body-element {
+    display: none;
+  }
+  .thread-list {
+    display: block !important;
+  }
+  .thread-content {
+    display: block !important;
+  }
+  #back-to-thread-list {
+    display: none !important;
+  }
+}

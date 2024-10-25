@@ -1,0 +1,17 @@
+@media (max-width: 400px) {
+  .thread-list {
+    width: 100%;
+    display: block;
+  }
+  .thread-content {
+    width: 100%;
+    display: none;
+  }
+  #back-to-thread-list {
+    display: none;
+  }
+  .body-element {
+    display: flex;
+    justify-content: space-around;
+  }
+}

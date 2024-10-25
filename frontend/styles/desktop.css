@@ -1,0 +1,15 @@
+@media (min-width: 701px) {
+  .thread-list {
+    display: block !important;
+  }
+  .thread-content {
+    display: block !important;
+  }
+  #back-to-thread-list {
+    display: none !important;
+  }
+  .body-element {
+    display: flex;
+    justify-content: space-around;
+  }
+}
