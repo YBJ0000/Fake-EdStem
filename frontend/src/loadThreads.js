@@ -5,8 +5,6 @@ import { start, limit, token, updateStart } from './main.js';
 export const loadThreads = () => {
   apiCall(`threads?start=${start}&limit=${limit}`, {}, 'GET', token).then(data => {
 
-    // 新问题，每次确实获取5个thread
-    // 但是private不展示
     console.log('Total threads from API:', data.length);
 
     const threadList = document.getElementById('thread-list');
@@ -47,7 +45,6 @@ export const loadThreads = () => {
             threadItem.appendChild(bodyElement)
 
             threadItem.style.cursor = 'pointer';
-            // 添加边框！记得删除然后在.css里面加！！！maybe不用？？？
             threadItem.style.border = '1px solid black'
 
             threadItem.addEventListener('click', () => {

@@ -367,12 +367,10 @@ document.getElementById('back-to-thread-list').addEventListener('click', () => {
 export const showComments = (threadId) => {
   apiCall(`comments?threadId=${threadId}`, {}, 'GET', token).then(comments => {
     const commentList = document.getElementById('comment-list');
-    commentList.innerHTML = ''; // 清空之前的评论
+    commentList.innerHTML = '';
 
-    // 按时间倒序排列评论
     comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    // 遍历所有评论并渲染
     comments.forEach(comment => {
       const commentElement = createCommentElement(comment);
       commentList.appendChild(commentElement);
@@ -387,7 +385,6 @@ const createCommentElement = (comment) => {
   const commentElement = document.createElement('div');
   commentElement.classList.add('comment');
 
-  // 生成头像、文本、时间和点赞数
   const commentText = document.createElement('p');
   commentText.textContent = comment.content;
 
@@ -397,18 +394,16 @@ const createCommentElement = (comment) => {
   const likeCount = document.createElement('span');
   likeCount.textContent = `Likes: ${comment.likes.length}`;
 
-  // 组装评论元素
   commentElement.appendChild(commentText);
   commentElement.appendChild(timeAgo);
   commentElement.appendChild(likeCount);
 
-  // 如果有父评论，则递归生成子评论并缩进
   if (comment.replies && comment.replies.length > 0) {
     const repliesContainer = document.createElement('div');
     repliesContainer.classList.add('replies');
     comment.replies.forEach(reply => {
       const replyElement = createCommentElement(reply);
-      replyElement.style.marginLeft = '20px';  // 缩进
+      replyElement.style.marginLeft = '20px';
       repliesContainer.appendChild(replyElement);
     });
     commentElement.appendChild(repliesContainer);
@@ -458,7 +453,6 @@ const submitComment = () => {
     parentCommentId: null
   }, 'POST', token).then(data => {
     console.log('Comment posted successfully:', data);
-    // 清空输入框并刷新评论区
     document.getElementById('new-comment-content').value = '';
     showComments(currentThreadData.id);
   }).catch(error => {
@@ -489,7 +483,6 @@ const submitReply = () => {
   }, 'POST', token).then(data => {
     console.log('Reply posted successfully:', data);
 
-    // 清空回复框，关闭模态框，并刷新评论区
     document.getElementById('reply-comment-content').value = '';
     closeReplyModal();
     showComments(currentThreadData.id);

@@ -42,7 +42,6 @@ export const showThreadContent = (threadData) => {
 
   window.currentThreadData = threadData
 
-  // 调用 ShowComments 来显示评论
   showComments(threadData.id);
 
   checkLockedThread();
