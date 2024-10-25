@@ -51,7 +51,6 @@ export const showThreadContent = (threadData) => {
   const currentUserId = parseInt(localStorage.getItem('userId'));
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
-  // 判断用户id和文章作者id是否一致，一致才允许修改
   if (currentUserId === currentThreadData.creatorId || isAdmin) {
     document.getElementById('edit-thread-btn').style.display = 'block'
     document.getElementById('delete-thread-btn').style.display = 'block'
@@ -62,28 +61,20 @@ export const showThreadContent = (threadData) => {
 
   document.getElementById('edit-thread').style.display = 'none'
 
-  
-  // 如果帖子被锁定或帖子数据不存在，隐藏点赞按钮
   if (!currentThreadData || currentThreadData.lock) {
-    likeButton.style.display = 'none'; // 隐藏按钮
+    likeButton.style.display = 'none';
     watchButton.style.display = 'none'
   } else {
-    likeButton.style.display = 'inline'; // 显示按钮
+    likeButton.style.display = 'inline';
     likeButton.style.cursor = 'pointer'
     watchButton.style.display = 'inline'
     watchButton.style.cursor = 'pointer'
 
-    // 更新图标状态：根据用户是否已经点赞设置图标
     const isLiked = currentThreadData.likes.includes(currentUserId);
-
     updateLikeIcon(isLiked);
   }
 
-  
-
   const isWatched = currentThreadData.watchees.includes(currentUserId)
-
   updateWatchIcon(isWatched)
-  
 }
 

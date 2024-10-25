@@ -3,7 +3,7 @@ import { BACKEND_PORT } from './config.js';
 import { fileToDataUrl } from './helpers.js';
 
 import { apiCall } from './api.js';
-import { goToPage, setLoggedIn, showThreadContent } from './ui.js';
+import { goToPage, setLoggedIn } from './ui.js';
 import { loadThreads } from './loadThreads.js';
 
 export const pages = ['register', 'login', 'dashboard', 'create']
@@ -25,7 +25,6 @@ document.getElementById('logout').addEventListener('click', () => {
   const threadList = document.getElementById('thread-list')
   threadList.innerHTML = ''
 
-  // 登出时重置content
   const threadTitle = document.getElementById('thread-title')
   const threadBody = document.getElementById('thread-body')
   const threadLikes = document.getElementById('thread-likes')
@@ -68,7 +67,6 @@ document.getElementById('register-btn').addEventListener('click', () => {
     name
   }, 'POST', token).then(data => {
 
-    // 清空原来内容
     document.getElementById('register-email').value = ''
     document.getElementById('register-password').value = ''
     document.getElementById('register-confirm-password').value = ''
@@ -108,7 +106,6 @@ document.getElementById('login-btn').addEventListener('click', () => {
     password
   }, 'POST', token).then(data => {
 
-    // 清空原来内容
     document.getElementById('login-email').value = ''
     document.getElementById('login-password').value = ''
 
@@ -117,14 +114,12 @@ document.getElementById('login-btn').addEventListener('click', () => {
     const threadTitle = document.getElementById('thread-title')
     threadTitle.style.display = 'block'
 
-    // 登录成功才会跳转到dashboard
     localStorage.setItem('token', data.token)
     localStorage.setItem('userId', data.userId)
     setLoggedIn(true)
     
     token = data.token
 
-    // 获取当前用户信息
     const userId = localStorage.getItem('userId')
     apiCall(`user?userId=${userId}`, {}, 'GET', token).then(userData => {
       localStorage.setItem('isAdmin', userData.admin)
@@ -161,12 +156,11 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     return apiCall(`thread?id=${newThreadId}`, {}, 'GET', token)
   }).then(threadData => {
     window.currentThreadData = threadData
-    // 重置create页面
+
     document.getElementById('new-thread-title').value = '';
     document.getElementById('new-thread-content').value = '';
     document.getElementById('thread-public').checked = true;
 
-    // content展示新内容
     document.getElementById('thread-title').textContent = threadData.title;
     document.getElementById('thread-body').textContent = threadData.content;
     document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(threadData.likes).length}`;
@@ -174,13 +168,11 @@ document.getElementById('new-thread-btn').addEventListener('click', () => {
     document.getElementById('thread-content').style.display = 'block';
     document.getElementById('edit-thread').style.display = 'none';
 
-    // 显示编辑和删除按钮
     const editThreadButton = document.getElementById('edit-thread-btn');
     const deleteThreadButton = document.getElementById('delete-thread-btn');
     editThreadButton.style.display = 'block';
     deleteThreadButton.style.display = 'block';
 
-    // 重新加载帖子列表
     const threadList = document.getElementById('thread-list');
     threadList.innerHTML = '';
     start = 0;
@@ -218,7 +210,6 @@ document.getElementById('edit-thread-btn').addEventListener('click', () => {
   document.getElementById('delete-thread-btn').style.display = 'none'
   document.getElementById('like-thread-btn').style.display = 'none'
   document.getElementById('watch-thread-btn').style.display = 'none'
-
   document.getElementById('edit-thread').style.display = 'block'
 
   document.getElementById('edit-thread-title').value = document.getElementById('thread-title').textContent
@@ -246,7 +237,6 @@ document.getElementById('save-thread-btn').addEventListener('click', () => {
     lock: isLocked
   }, 'PUT', token).then(data => {
 
-    // 必须清空左侧列表然后重新加载
     const threadList = document.getElementById('thread-list')
     threadList.innerHTML = ''
     start = 0
@@ -254,9 +244,7 @@ document.getElementById('save-thread-btn').addEventListener('click', () => {
 
     document.getElementById('thread-title').textContent = newTitle
     document.getElementById('thread-body').textContent = newContent
-
     document.getElementById('edit-thread').style.display = 'none'
-
     document.getElementById('thread-title').style.display = 'block'
     document.getElementById('thread-body').style.display = 'block'
     document.getElementById('thread-likes').style.display = 'block'
@@ -274,18 +262,16 @@ document.getElementById('delete-thread-btn').addEventListener('click', () => {
   apiCall('thread', {
     id: currentThreadData.id
   }, 'DELETE', token).then(data => {
-    // 必须清空左侧列表然后重新加载
+
     const threadList = document.getElementById('thread-list')
     threadList.innerHTML = ''
     start = 0
     loadThreads()
 
-    // 重置右侧内容，而不是清空整个容器
     document.getElementById('thread-title').textContent = 'Select a thread';
     document.getElementById('thread-body').textContent = '';
     document.getElementById('thread-likes').textContent = '';
 
-    // 隐藏编辑和删除按钮
     document.getElementById('edit-thread-btn').style.display = 'none'
     document.getElementById('delete-thread-btn').style.display = 'none';
     document.getElementById('like-thread-btn').style.display = 'none'
@@ -298,14 +284,12 @@ export const likeButton = document.getElementById('like-thread-btn')
 
 likeButton.addEventListener('click', () => {
   
-  // 检查是否有帖子数据或帖子是否锁定
   if (!currentThreadData || currentThreadData.lock) {
     console.log('Thread is locked or data is unavailable.');
     return;
   }
 
   const currentUserId = parseInt(localStorage.getItem('userId'));
-  // 判断用户是否已经点赞，如果是，则取消点赞，反之则点赞
   const isLiked = currentThreadData.likes.includes(currentUserId);
 
   apiCall('thread/like', {
@@ -318,10 +302,8 @@ likeButton.addEventListener('click', () => {
       currentThreadData.likes = currentThreadData.likes.filter(id => id !== currentUserId)
     }
 
-    // 更新图标状态
     updateLikeIcon(!isLiked)
 
-    // 更新点赞数量
     document.getElementById('thread-likes').textContent = `Likes: ${Object.keys(currentThreadData.likes).length}`
 
     console.log('Like status updated successfully:', data);
@@ -359,7 +341,6 @@ watchButton.addEventListener('click', () => {
       currentThreadData.watchees = currentThreadData.watchees.filter(id => id !== currentUserId)
     }
 
-    // 更新图标状态
     updateWatchIcon(!isWatched)
     
     console.log('Watch status updated successfully:',data);
@@ -378,11 +359,10 @@ export const updateWatchIcon = (watched) => {
   }
 }
 
-// 返回按钮的点击事件
 document.getElementById('back-to-thread-list').addEventListener('click', () => {
-  document.querySelector('.thread-list').style.display = 'block'; // 显示帖子列表
-  document.querySelector('.thread-content').style.display = 'none'; // 隐藏帖子内容
-  document.getElementById('back-to-thread-list').style.display = 'none'; // 隐藏返回按钮
+  document.querySelector('.thread-list').style.display = 'block';
+  document.querySelector('.thread-content').style.display = 'none';
+  document.getElementById('back-to-thread-list').style.display = 'none';
 });
 
 

@@ -15,7 +15,7 @@ export const apiCall = (route, body, method, token) => {
       if (response.status !== 200) {
         return response.json().then(errorData => {
           const errorMessage = errorData.error || 'Unknown error occurred!'
-          showAlert(errorMessage); // 使用自定义弹窗
+          showAlert(errorMessage);
           reject(errorMessage)
         })
       }
@@ -24,7 +24,7 @@ export const apiCall = (route, body, method, token) => {
       resolve(data)
     }).catch(err => {
       const errorMessage = err.message || 'Network error or unknown error occurred!'
-      showAlert(errorMessage); // 使用自定义弹窗
+      showAlert(errorMessage);
       reject(errorMessage)
     })
   })
