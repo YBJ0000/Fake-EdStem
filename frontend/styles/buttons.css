@@ -14,6 +14,6 @@
   display: none;
 }
 
-.thread-content button {
+.thread-content > button {
   display: none;
 }
